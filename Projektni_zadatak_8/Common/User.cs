@@ -17,7 +17,7 @@ namespace Common
         private bool enabled = false;
         private bool locked = false;
 
-        public Account(string username, string password)
+        public User(string username, string password)
         {
             this.Username = username;
             this.Password = password;

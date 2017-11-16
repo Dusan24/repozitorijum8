@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace ClientUsers
 {
@@ -10,6 +11,17 @@ namespace ClientUsers
     {
         static void Main(string[] args)
         {
+            NetTcpBinding tb = new NetTcpBinding();
+
+
+            using (ProxyClientUsers p=new ProxyClientUsers(tb, "net.tcp://localhost:9999/AuthentificationService"))
+            {
+            
+                p.Login("user1","pas1");
+                p.Logout("user1");
+            }
+
+
         }
     }
 }
