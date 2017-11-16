@@ -8,19 +8,15 @@ using System.Threading.Tasks;
 
 namespace ClientUsers
 {
-<<<<<<< HEAD:Projektni_zadatak_8/ClientUsers/ClientUsersProxy.cs
+
     public class ClientUsersProxy : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
+       
+   
         IAuthentificationService factory;
 
         public ClientUsersProxy(NetTcpBinding binding, string address) : base(binding, address)
-=======
-    public class ProxyClientUsers : ChannelFactory<IAuthentificationService>, IAuthentificationService
-    {
-        IAuthentificationService factory;
 
-        public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)
->>>>>>> origin/UN95_1:Projektni_zadatak_8/ClientUsers/ClientUsersProxy.cs
         {
             factory = this.CreateChannel();
         }
