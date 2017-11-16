@@ -14,6 +14,6 @@ namespace Common
         bool Login(string username,string password);
 
         [OperationContract]
-        void Logout(string username);
+        bool Logout(string username);
     }
 }
