@@ -14,9 +14,11 @@ namespace AutentificationServiceProject
             throw new NotImplementedException();
         }
 
-        public void Logout(string username)
+        public bool Logout(string username)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }
