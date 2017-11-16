@@ -50,19 +50,7 @@ namespace CredentialStoreProject
             //format hash with extra information
             return retVal;
         }
-        /// <summary>
-        /// Creates a hash from a password with 10000 iterations
-        /// </summary>
-        /// <param name="password">the password</param>
-        /// <returns>the hash</returns>
-      
 
-        /// <summary>
-        /// Check if hash is supported
-        /// </summary>
-        /// <param name="hashString">the hash</param>
-        /// <returns>is supported?</returns>
-      
         /// <summary>
         /// verify a password against a hash
         /// </summary>
@@ -92,7 +80,6 @@ namespace CredentialStoreProject
             byte[] newhash= hashalg.ComputeHash(hashBytes);
 
             return (hashpass.SequenceEqual(newhash));
-
 
             
         }

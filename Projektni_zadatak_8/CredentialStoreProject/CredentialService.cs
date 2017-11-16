@@ -7,7 +7,7 @@ using Common;
 
 namespace CredentialStoreProject
 {
-    public class AuthentificationService : IAccountManagement
+    public class CredentialService : IAccountManagement
     {
         public Dictionary<string, User> users = new Dictionary<string, User>();
 
