@@ -12,7 +12,7 @@ namespace Common
     public interface IAccountManagement
     {
         [OperationContract]
-        bool CreateAccount(string username);
+        bool CreateAccount(string username,string password);
 
         [OperationContract]
         bool DeleteAccount(string username);
