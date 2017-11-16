@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
-using System.ServiceModel;
 
-namespace ClientAdmins
+namespace ClientUsers
 {
-    public class ClientProxy : ChannelFactory<IAuthentificationService>, IAuthentificationService
+    public class ProxyClientUsers : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
         IAuthentificationService factory;
 
-        public ClientProxy(NetTcpBinding binding, string address) : base(binding, address)
+        public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)
         {
             factory = this.CreateChannel();
         }
@@ -21,7 +21,7 @@ namespace ClientAdmins
             bool result;
             try
             {
-                result=factory.Login(username, password);
+                result = factory.Login(username, password);
                 return result;
             }
             catch (Exception e)
