@@ -20,6 +20,9 @@ namespace ClientUsers
         {
             factory = this.CreateChannel();
         }
+
+      
+
         public bool Login(string username, string password)
         {
             bool result;
