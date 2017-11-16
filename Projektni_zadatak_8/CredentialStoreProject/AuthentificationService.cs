@@ -9,9 +9,22 @@ namespace CredentialStoreProject
 {
     public class AuthentificationService : IAccountManagement
     {
-        public bool CreateAccount(string username)
+        public Dictionary<string, User> users = new Dictionary<string, User>();
+
+        public bool CreateAccount(string username, string password)
         {
-            throw new NotImplementedException();
+
+            if (!users.ContainsKey(username))
+            {
+                User a = new User(username, password);
+                users.Add(username,a);
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
         }
 
         public bool DeleteAccount(string username)

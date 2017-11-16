@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace Common
 {
     [DataContract]
-    public class Account
+    public class User
     {
         private string username = String.Empty;
         private string password = String.Empty;
@@ -17,12 +17,12 @@ namespace Common
         private bool enabled = false;
         private bool locked = false;
 
-        public Account(string username, string password, bool enabled, bool locked)
+        public Account(string username, string password)
         {
             this.Username = username;
             this.Password = password;
-            this.Enabled = true;
-            this.Locked = false;
+            Enabled = true;
+            Locked = false;
         }
 
         [DataMember]
