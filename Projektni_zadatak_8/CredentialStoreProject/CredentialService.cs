@@ -9,6 +9,7 @@ namespace CredentialStoreProject
 {
     public class CredentialService : IAccountManagement
     {
+        public SecurePasswordHasher hasher = new SecurePasswordHasher();
         public Dictionary<string, User> users = new Dictionary<string, User>();
 
         public bool CreateAccount(string username, string password)
@@ -29,22 +30,78 @@ namespace CredentialStoreProject
 
         public bool DeleteAccount(string username)
         {
-            throw new NotImplementedException();
+            if (users.ContainsKey(username))
+            {
+                users.Remove(username);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool DisableAccount(string username)
         {
-            throw new NotImplementedException();
+            if(users.ContainsKey(username))
+            {
+                if(users[username].Enabled == true)
+                {
+                    users[username].Enabled = false;
+                    return true;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+
+                return false;
+            }
         }
 
         public bool EnableAccount(string username)
         {
-            throw new NotImplementedException();
+            if (users.ContainsKey(username))
+            {
+                if (users[username].Enabled == false)
+                {
+                    users[username].Enabled = true;
+                    return true;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+
+                return false;
+            }
         }
 
         public bool LockAccount(string username)
         {
-            throw new NotImplementedException();
+            if (users.ContainsKey(username))
+            {
+                if (users[username].Locked == false)
+                {
+                    users[username].Locked = true;
+                    return true;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+
+                return false;
+            }
         }
     }
 }
