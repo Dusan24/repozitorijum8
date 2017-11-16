@@ -14,10 +14,6 @@ namespace ClientAdmins
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 730080b586486e378e7c9835ed4b3ade865a1ef9
         }
     }
 }
