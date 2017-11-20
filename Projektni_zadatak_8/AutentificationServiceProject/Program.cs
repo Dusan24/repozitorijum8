@@ -15,7 +15,10 @@ namespace AutentificationServiceProject
 
 
             NetTcpBinding binding = new NetTcpBinding();
+<<<<<<< HEAD
 
+=======
+>>>>>>> VV-
             string address = "net.tcp://localhost:9999/AuthentificationService";
 
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
