@@ -48,7 +48,6 @@ namespace ClientAdmins
             }
         }
 
-        public bool DisableAccount(string username)
 
  
 
@@ -57,7 +56,6 @@ namespace ClientAdmins
             bool result;
             try
             {
-                result = factory.DisableAccount(username);
 
                 result = factory.LockAccount(username);
 
@@ -85,7 +83,6 @@ namespace ClientAdmins
             }
         }
 
-        public bool LockAccount(string username)
        
         public bool DisableAccount(string username)
 
@@ -93,7 +90,6 @@ namespace ClientAdmins
             bool result;
             try
             {
-                result = factory.LockAccount(username);
 
 
                 result = factory.DisableAccount(username);
