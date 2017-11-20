@@ -17,6 +17,7 @@ namespace Common
 
         private bool enabled = false;
         private bool locked = false;
+        private bool loged = false;
 
         public User(string username, string password)
         {
@@ -25,6 +26,20 @@ namespace Common
             Enabled = true;
             Locked = false;
         }
+        [DataMember]
+        public bool Loged
+        {
+            get
+            {
+                return loged;
+            }
+
+            set
+            {
+                loged = value;
+            }
+        }
+
 
         [DataMember]
         public string Username

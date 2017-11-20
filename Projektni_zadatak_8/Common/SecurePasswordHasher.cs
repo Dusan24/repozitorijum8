@@ -51,11 +51,11 @@ namespace Common
 
 
 
-            hash.ComputeHash(hashBytes);
+            byte[] bte= hash.ComputeHash(hashBytes);
 
             //convert to base64
-            var base64Hash = Convert.ToBase64String(hashBytes);
-            var retVal = String.Concat(hashBytes, salt);
+        
+            var retVal = String.Concat(Convert.ToBase64String(bte), Convert.ToBase64String(salt));
             //format hash with extra information
             return retVal;
         }
@@ -82,7 +82,14 @@ namespace Common
 
             var hashBytes = new byte[SaltSize + HashSize];
             Array.Copy(salt, 0, hashBytes, 0, SaltSize);
-            Array.Copy(pass, 0, hashBytes, SaltSize, HashSize);
+            if (pass.Length < HashSize)
+            {
+                Array.Copy(pass, 0, hashBytes, SaltSize, pass.Length);
+            }
+            else
+            {
+                Array.Copy(pass, 0, hashBytes, SaltSize, HashSize);
+            }
 
             HashAlgorithm hashalg;
             hashalg = new SHA256Managed();
