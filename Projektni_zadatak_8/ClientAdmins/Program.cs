@@ -16,15 +16,12 @@ namespace ClientAdmins
             NetTcpBinding tb = new NetTcpBinding();
 
 
-<<<<<<< HEAD
+
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb, ServiceAddresses.CredentialServiceAddress))
             {
-=======
-            using (ProxyClientAdmins p = new ProxyClientAdmins(tb, "net.tcp://localhost:9999/CredentialService"))
-            {
 
+         
 
->>>>>>> VV-
                 Console.ReadKey();
             }
 
