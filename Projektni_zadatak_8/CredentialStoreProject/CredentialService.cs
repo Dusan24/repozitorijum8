@@ -9,17 +9,17 @@ namespace CredentialStoreProject
 {
     public class CredentialService : IAccountManagement
     {
-        const string data = "data";
+        const string file_name = "data";
         public static Dictionary<string, User> users = Load();
 
         private static Dictionary<string, User> Load()
         {
-            if(!File.Exists(data))
+            if(!File.Exists(file_name))
             {
                 return new Dictionary<string, User>();
             }
 
-            FileStream fs = new FileStream(data, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
             BinaryFormatter bf = new BinaryFormatter();
             object obj = bf.Deserialize(fs);
             if (obj.GetType().Equals(typeof(Dictionary<string, User>)))
@@ -44,7 +44,7 @@ namespace CredentialStoreProject
                 
                 User a = new User(username, password);
                 users.Add(a.Username,a);
-                FileStream fs = new FileStream(data, FileMode.OpenOrCreate);
+                FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(fs,users);
                 return true;
@@ -61,7 +61,7 @@ namespace CredentialStoreProject
             if (users.ContainsKey(username))
             {
                 users.Remove(username);
-                FileStream fs = new FileStream(data, FileMode.OpenOrCreate);
+                FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(fs, users);
                 return true;
@@ -79,7 +79,7 @@ namespace CredentialStoreProject
                 if(users[username].Enabled == true)
                 {
                     users[username].Enabled = false;
-                    FileStream fs = new FileStream(data, FileMode.OpenOrCreate);
+                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(fs, users);
                     return true;
@@ -103,7 +103,7 @@ namespace CredentialStoreProject
                 if (users[username].Enabled == false)
                 {
                     users[username].Enabled = true;
-                    FileStream fs = new FileStream(data, FileMode.OpenOrCreate);
+                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(fs, users);
                     return true;
@@ -127,7 +127,7 @@ namespace CredentialStoreProject
                 if (users[username].Locked == false)
                 {
                     users[username].Locked = true;
-                    FileStream fs = new FileStream(data, FileMode.OpenOrCreate);
+                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(fs, users);
                     return true;
