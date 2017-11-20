@@ -49,11 +49,18 @@ namespace ClientAdmins
         }
 
         public bool DisableAccount(string username)
+
+ 
+
+        public bool LockAccount(string username)
         {
             bool result;
             try
             {
                 result = factory.DisableAccount(username);
+
+                result = factory.LockAccount(username);
+
                 return result;
             }
             catch (Exception e)
@@ -79,11 +86,18 @@ namespace ClientAdmins
         }
 
         public bool LockAccount(string username)
+       
+        public bool DisableAccount(string username)
+
         {
             bool result;
             try
             {
                 result = factory.LockAccount(username);
+
+
+                result = factory.DisableAccount(username);
+
                 return result;
             }
             catch (Exception e)

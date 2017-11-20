@@ -10,5 +10,6 @@ namespace Common
     {
         public const  string CredentialServiceAddress = "net.tcp://localhost:9999/CredentialService";
         public const string AuthentificationServiceAddress = "net.tcp://localhost:9998/AuthentificationService";
+        public const string AuthentificationServiceAddress = "net.tcp://localhost:27016/AuthentificationService";
     }
 }

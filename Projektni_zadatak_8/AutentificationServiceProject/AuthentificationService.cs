@@ -13,14 +13,14 @@ namespace AutentificationServiceProject
 
         public bool Login(string username, string password)
         {
-            
+
             Console.WriteLine("Hello.");
             return true;
         }
 
         public bool Logout(string username)
         {
-            
+
             Console.WriteLine("Hello.");
             return true;
         }

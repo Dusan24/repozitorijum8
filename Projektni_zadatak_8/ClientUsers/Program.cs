@@ -16,6 +16,8 @@ namespace ClientUsers
 
             using (ProxyClientUsers p = new ProxyClientUsers(tb,ServiceAddresses.AuthentificationServiceAddress))
             {
+                p.Login("user1","pas1");
+                p.Logout("user1");
             
                 p.Login("user1","pas1");
                 p.Logout("user1");
