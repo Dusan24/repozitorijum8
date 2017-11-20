@@ -11,8 +11,6 @@ namespace ClientUsers
     {
         static void Main(string[] args)
         {
-
-
             NetTcpBinding tb = new NetTcpBinding();
 
 
@@ -23,8 +21,6 @@ namespace ClientUsers
                 p.Logout("user1");
                 Console.ReadKey();
             }
-
-
         }
     }
 }
