@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
-
+using Common;
 namespace ClientUsers
 {
     class Program
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
+
 
             NetTcpBinding tb = new NetTcpBinding();
 
 
-            using (ProxyClientUsers p = new ProxyClientUsers(tb, "net.tcp://localhost:9999/AuthentificationService"))
+            using (ProxyClientUsers p = new ProxyClientUsers(tb,ServiceAddresses.AuthentificationServiceAddress))
             {
             
                 p.Login("user1","pas1");
@@ -24,9 +24,6 @@ namespace ClientUsers
                 Console.ReadKey();
             }
 
-=======
-
->>>>>>> origin/UN95_1
 
         }
     }
