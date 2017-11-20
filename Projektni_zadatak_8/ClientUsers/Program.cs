@@ -13,6 +13,7 @@ namespace ClientUsers
         {
 <<<<<<< HEAD
 
+
             NetTcpBinding tb = new NetTcpBinding();
 
 
