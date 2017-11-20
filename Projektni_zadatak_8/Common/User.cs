@@ -8,11 +8,12 @@ using System.Runtime.Serialization;
 
 namespace Common
 {
+    [Serializable]
     [DataContract]
     public class User
     {
         private string username = String.Empty;
-        private string password = String.Empty;
+        private string password;
 
         private bool enabled = false;
         private bool locked = false;
@@ -20,7 +21,7 @@ namespace Common
         public User(string username, string password)
         {
             this.Username = username;
-            this.Password = password;
+            this.Password = SecurePasswordHasher.Hash(password);
             Enabled = true;
             Locked = false;
         }

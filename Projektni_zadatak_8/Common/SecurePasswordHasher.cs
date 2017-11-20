@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CredentialStoreProject
+namespace Common
 {
     public static class SecurePasswordHasher
     {
@@ -40,7 +40,16 @@ namespace CredentialStoreProject
             //combine salt and hash
             var hashBytes = new byte[SaltSize + HashSize];
             Array.Copy(salt, 0, hashBytes, 0, SaltSize);
-            Array.Copy(hashVal, 0, hashBytes, SaltSize, HashSize);
+            if (hashVal.Length < HashSize)
+            {
+                Array.Copy(hashVal, 0, hashBytes, SaltSize, hashVal.Length);
+            }
+            else
+            {
+                Array.Copy(hashVal, 0, hashBytes, SaltSize,HashSize);
+            }
+
+
 
             hash.ComputeHash(hashBytes);
 

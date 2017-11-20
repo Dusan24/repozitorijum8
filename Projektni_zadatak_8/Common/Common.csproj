@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SecurePasswordHasher.cs" />
     <Compile Include="ServiceAddresses.cs" />
     <Compile Include="User.cs" />
     <Compile Include="IAccountManagement.cs" />

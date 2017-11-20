@@ -18,6 +18,7 @@ namespace ClientAdmins
 
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb, ServiceAddresses.CredentialServiceAddress))
             {
+                p.CreateAccount("user1","123");
                 Console.ReadKey();
             }
 
