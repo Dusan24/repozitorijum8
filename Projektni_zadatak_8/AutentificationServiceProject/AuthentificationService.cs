@@ -9,16 +9,18 @@ namespace AutentificationServiceProject
 {
     class AuthentificationService : IAuthentificationService
     {
+
+
         public bool Login(string username, string password)
         {
-            throw new NotImplementedException();
+            
             Console.WriteLine("Hello.");
             return true;
         }
 
         public bool Logout(string username)
         {
-            throw new NotImplementedException();
+            
             Console.WriteLine("Hello.");
             return true;
         }
