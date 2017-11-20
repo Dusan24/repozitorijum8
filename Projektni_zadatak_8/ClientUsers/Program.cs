@@ -16,11 +16,17 @@ namespace ClientUsers
 
             using (ProxyClientUsers p = new ProxyClientUsers(tb,ServiceAddresses.AuthentificationServiceAddress))
             {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
                 p.Login("user1","pas1");
                 p.Logout("user1");
+>>>>>>> f403349710b781f74f2a0c8c1800f8086db60e81
+=======
             
                 p.Login("user1","pas1");
                 p.Logout("user1");
+>>>>>>> parent of f1ae893... Logovanje klijenta
                 Console.ReadKey();
             }
         }
