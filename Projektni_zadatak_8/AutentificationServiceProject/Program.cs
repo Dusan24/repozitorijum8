@@ -20,6 +20,7 @@ namespace AutentificationServiceProject
             string address = "net.tcp://localhost:9998/AuthentificationService";
 =======
 <<<<<<< HEAD
+            string address = ServiceAddresses.AuthentificationServiceAddress;
 =======
 =======
 >>>>>>> VV-

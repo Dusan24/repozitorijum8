@@ -21,6 +21,15 @@ namespace ClientUsers
                 p.Login("user1","pas1");
                 p.Logout("user1");
 >>>>>>> f403349710b781f74f2a0c8c1800f8086db60e81
+
+                Console.WriteLine("Unesite korisnicko ime: ");
+                string a = Console.ReadLine();
+                Console.WriteLine("Unesite lozinku: ");
+                string b = Console.ReadLine();
+
+                p.Login(a,b);
+
+
                 Console.ReadKey();
             }
         }
