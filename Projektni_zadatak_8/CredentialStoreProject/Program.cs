@@ -12,7 +12,7 @@ namespace CredentialStoreProject
         static void Main(string[] args)
         {
 
-            ServiceHost
+            
 
         }
     }
