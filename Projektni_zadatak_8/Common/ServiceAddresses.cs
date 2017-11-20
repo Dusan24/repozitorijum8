@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    class ServiceAddresses
+    public static class ServiceAddresses
     {
 
+        public const  string CredentialServiceAddress = "net.tcp://localhost:9999/CredentialService";
+        public const string AuthentificationServiceAddress = "net.tcp://localhost:9998/AuthentificationService";
     }
 }

@@ -15,6 +15,7 @@ namespace ClientUsers
 
 
             using (ProxyClientUsers p = new ProxyClientUsers(tb, "net.tcp://localhost:9999/AuthentificationService"))
+            using (ProxyClientUsers p = new ProxyClientUsers(tb,ServiceAddresses.AuthentificationServiceAddress))
             {
             
                 p.Login("user1","pas1");
