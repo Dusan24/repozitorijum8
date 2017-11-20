@@ -9,8 +9,6 @@ namespace AutentificationServiceProject
 {
     class AuthentificationService : IAuthentificationService
     {
-
-
         public bool Login(string username, string password)
         {
 
