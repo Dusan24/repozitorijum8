@@ -15,8 +15,15 @@ namespace AutentificationServiceProject
 
 
             NetTcpBinding binding = new NetTcpBinding();
+<<<<<<< HEAD
 
+<<<<<<< HEAD
             string address = ServiceAddresses.AuthentificationServiceAddress;
+=======
+=======
+>>>>>>> VV-
+            string address = "net.tcp://localhost:9999/AuthentificationService";
+>>>>>>> f403349710b781f74f2a0c8c1800f8086db60e81
 
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);

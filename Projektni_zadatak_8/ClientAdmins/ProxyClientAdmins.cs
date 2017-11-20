@@ -13,7 +13,10 @@ namespace ClientAdmins
         IAccountManagement factory;
 
         public ProxyClientAdmins(NetTcpBinding binding, string address) : base(binding, address)
+<<<<<<< HEAD
 
+=======
+>>>>>>> VV-
         {
             factory = this.CreateChannel();
         }
@@ -48,12 +51,20 @@ namespace ClientAdmins
             }
         }
 
+<<<<<<< HEAD
         public bool DisableAccount(string username)
+=======
+        public bool LockAccount(string username)
+>>>>>>> VV-
         {
             bool result;
             try
             {
+<<<<<<< HEAD
                 result = factory.DisableAccount(username);
+=======
+                result = factory.LockAccount(username);
+>>>>>>> VV-
                 return result;
             }
             catch (Exception e)
@@ -78,12 +89,20 @@ namespace ClientAdmins
             }
         }
 
+<<<<<<< HEAD
         public bool LockAccount(string username)
+=======
+        public bool DisableAccount(string username)
+>>>>>>> VV-
         {
             bool result;
             try
             {
+<<<<<<< HEAD
                 result = factory.LockAccount(username);
+=======
+                result = factory.DisableAccount(username);
+>>>>>>> VV-
                 return result;
             }
             catch (Exception e)
