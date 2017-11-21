@@ -28,6 +28,9 @@ namespace ClientUsers
                 int choice = Convert.ToInt32(Console.ReadLine());
 
 
+            
+                p.Login("user1","pas1");
+                p.Logout("user1");
                 switch (choice)
                 {
                     case 1:
