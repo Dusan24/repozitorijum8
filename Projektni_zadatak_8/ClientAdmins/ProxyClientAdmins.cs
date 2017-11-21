@@ -25,11 +25,11 @@ namespace ClientAdmins
             {
                 result = factory.CreateAccount(username, password);
                 return result;
-              
+                Console.WriteLine("Account created succesfully");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("Account not created succesfully: {0}", e.Message);
                 return false;
             }
         }
@@ -41,10 +41,11 @@ namespace ClientAdmins
             {
                 result = factory.DeleteAccount(username);
                 return result;
+                Console.WriteLine("Account delete succesfully");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("Account not delete succesfully: {0}", e.Message);
                 return false;
             }
         }
@@ -61,10 +62,11 @@ namespace ClientAdmins
                 result = factory.LockAccount(username);
 
                 return result;
+                Console.WriteLine("Account locked succesfully");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("Account not locked succesfully: {0}", e.Message);
                 return false;
             }
         }
@@ -76,10 +78,11 @@ namespace ClientAdmins
             {
                 result = factory.EnableAccount(username);
                 return result;
+                Console.WriteLine("Account enabled succesfully");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("Account not enabled succesfully: {0}", e.Message);
                 return false;
             }
         }
@@ -96,10 +99,12 @@ namespace ClientAdmins
                 result = factory.DisableAccount(username);
 
                 return result;
+
+                Console.WriteLine("Account disabled successfully");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("Account not disabled successfully: {0}", e.Message);
                 return false;
             }
         }
