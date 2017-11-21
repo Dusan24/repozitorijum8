@@ -74,11 +74,11 @@ namespace Common
             byte[] pass = ASCIIEncoding.UTF8.GetBytes(password);
             byte[] hashpass = ASCIIEncoding.UTF8.GetBytes(hashedPassword);
 
-            byte[] hash = new byte[HashSize];
+            byte[] hash = new byte[hashedPassword.Length - SaltSize];
             byte[] salt = new byte[SaltSize];
 
-            Array.Copy(hashpass, hash, HashSize);
-            Array.Copy(hashpass, HashSize, salt, 0, SaltSize);
+            Array.Copy(hashpass, hash, hashedPassword.Length-SaltSize);
+            Array.Copy(hashpass, hashedPassword.Length - SaltSize, salt, 0, SaltSize);
 
             var hashBytes = new byte[SaltSize + HashSize];
             Array.Copy(salt, 0, hashBytes, 0, SaltSize);
