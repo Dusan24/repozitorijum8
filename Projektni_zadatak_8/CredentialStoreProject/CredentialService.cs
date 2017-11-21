@@ -10,7 +10,7 @@ namespace CredentialStoreProject
     public class CredentialService : IAccountManagement
     {
         const string file_name = "data";
-        public static Dictionary<string, User> users = new Dictionary<string, User>();
+        public static Dictionary<string, User> users = Load();
 
         private static Dictionary<string, User> Load()
         {
@@ -28,7 +28,7 @@ namespace CredentialStoreProject
             }
             else
             {
-                return new Dictionary<string, User>(); ;
+                return new Dictionary<string, User>(); 
             }
         }
 
