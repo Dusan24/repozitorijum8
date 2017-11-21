@@ -15,9 +15,10 @@ namespace AutentificationServiceProject
 
 
             NetTcpBinding binding = new NetTcpBinding();
+            
 
 
-    
+
             string address = ServiceAddresses.AuthentificationServiceAddress;
 
 

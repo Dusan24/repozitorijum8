@@ -5,14 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 using System.ServiceModel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AutentificationServiceProject
 {
     class AuthentificationService : IAuthentificationService
     {
 
-        ProxyClientUsers2 p = new ProxyClientUsers2(new NetTcpBinding(), ServiceAddresses.CA);
+        ProxyClientUsers2 p = StartProxy();
         Dictionary<string, User> users = new Dictionary<string, User>();
+
+        static ProxyClientUsers2 StartProxy()
+        {
+            NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
+            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "credentialstore");
+            EndpointAddress address = new EndpointAddress(new Uri(ServiceAddresses.CA),
+                                      new X509CertificateEndpointIdentity(srvCert));
+            return new ProxyClientUsers2(binding, address);
+            
+        }
 
         public bool Login(string username, string password)
         {
