@@ -11,8 +11,7 @@ namespace ClientUsers
 
     public class ProxyClientUsers : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
-       
-   
+        
         IAuthentificationService factory;
 
         public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)

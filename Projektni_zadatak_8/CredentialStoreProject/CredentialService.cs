@@ -34,10 +34,7 @@ namespace CredentialStoreProject
 
 
         public bool CreateAccount(string username, string password)
-        {
-
-           
-         
+        {         
             
             if (!users.ContainsKey(username))
             {
