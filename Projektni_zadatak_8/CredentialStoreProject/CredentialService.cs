@@ -24,12 +24,17 @@ namespace CredentialStoreProject
             object obj = bf.Deserialize(fs);
             if (obj.GetType().Equals(typeof(Dictionary<string, User>)))
             {
+                fs.Close();
                 return (Dictionary<string, User>)obj;
             }
             else
             {
+                fs.Close();
+                return new Dictionary<string, User>(); 
                 return new Dictionary<string, User>(); ;
             }
+
+            
         }
 
 
@@ -44,11 +49,12 @@ namespace CredentialStoreProject
                 FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(fs,users);
+                fs.Close();
                 return true;
             }
             else
             {
-
+               
                 return false;
             }
         }
@@ -61,6 +67,7 @@ namespace CredentialStoreProject
                 FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                 BinaryFormatter bf = new BinaryFormatter();
                 bf.Serialize(fs, users);
+                fs.Close();
                 return true;
             }
             else
@@ -79,6 +86,7 @@ namespace CredentialStoreProject
                     FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(fs, users);
+                    fs.Close();
                     return true;
                 }
                 else
@@ -103,6 +111,7 @@ namespace CredentialStoreProject
                     FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(fs, users);
+                    fs.Close();
                     return true;
                 }
                 else
@@ -127,6 +136,7 @@ namespace CredentialStoreProject
                     FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(fs, users);
+                    fs.Close();
                     return true;
                 }
                 else

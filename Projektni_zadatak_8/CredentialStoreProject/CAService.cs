@@ -32,7 +32,8 @@ namespace CredentialStoreProject
             }
            else
             {
-                throw new Exception("User doesnt exist.");
+                Console.WriteLine("User doesn't exist.");
+                return false;
             }
         }
 
