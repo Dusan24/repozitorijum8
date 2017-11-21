@@ -15,7 +15,13 @@ namespace Common
         public static string Hash(string password)
         {
 
+
+        private const int SaltSize = 16;
+    
+        public static string Hash(string password)
+        {
             HashAlgorithm hash_alg = new SHA256Managed();
+           
 
             byte[] byte_salt;
             new RNGCryptoServiceProvider().GetBytes(byte_salt = new byte[SaltSize]);
@@ -32,6 +38,7 @@ namespace Common
         }
 
 
+        }
         public static bool Verify(string password, string hashedPassword)
         {
 
@@ -48,6 +55,7 @@ namespace Common
             string hashedpasword2 = hashedPassword.Substring(0, hashedPassword.Length - SaltSize - 8);
 
 
+            string hashedpasword2 = hashedPassword.Substring(0, hashedPassword.Length - SaltSize - 8);
             return hashedpasword1 == hashedpasword2;
 
         }
