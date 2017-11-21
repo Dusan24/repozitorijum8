@@ -12,11 +12,7 @@ namespace Common
 
         private const int SaltSize = 16;
 
-        public static string Hash(string password)
-        {
-
-
-        private const int SaltSize = 16;
+ 
     
         public static string Hash(string password)
         {
@@ -33,13 +29,9 @@ namespace Common
             string salted_hashed_password = hashed_password + salt;
 
             return salted_hashed_password;
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> c19424fa88fc6040b669012b0a35f877894a1dec
 
-        }
+        
 
 
         }
@@ -59,7 +51,7 @@ namespace Common
             string hashedpasword2 = hashedPassword.Substring(0, hashedPassword.Length - SaltSize - 8);
 
 
-            string hashedpasword2 = hashedPassword.Substring(0, hashedPassword.Length - SaltSize - 8);
+            
             return hashedpasword1 == hashedpasword2;
 
         }
