@@ -20,7 +20,7 @@ namespace ClientAdmins
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb, ServiceAddresses.CredentialServiceAddress))
             {
 
-                while(true)
+                while (true)
                 {
 
                     Console.WriteLine("**********************");
@@ -33,8 +33,27 @@ namespace ClientAdmins
                     Console.WriteLine("6.Finish application ");
                     Console.WriteLine("**********************");
 
+                    int choice;
+                    bool parsed, in_range;
+                    //int choice = Convert.ToInt32(Console.ReadLine());
+                    do
+                    {
+                        do
+                        {
+                            parsed = int.TryParse(Console.ReadLine(), out choice);
+                            if (!parsed)
+                            {
+                                Console.WriteLine("input was not int, try again");
+                            }
+                        } while (!parsed);
+                        in_range = choice > 0 && choice < 7;
+                        if (!in_range)
+                        {
+                            Console.WriteLine("input was out of range, try again");
+                        }
+                    }
+                    while (!in_range);
 
-                    int choice = Convert.ToInt32(Console.ReadLine());
                     if (choice == 6)
                     {
                         break;

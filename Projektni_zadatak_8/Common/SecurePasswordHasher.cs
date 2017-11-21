@@ -13,11 +13,6 @@ namespace Common
 
         private const int SaltSize = 16;
 
-       
-
-    
-
-
     
         public static string Hash(string password)
         {
@@ -39,6 +34,7 @@ namespace Common
 
 
         }
+
 
 
 

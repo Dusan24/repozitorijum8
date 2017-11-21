@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,17 @@ namespace AutentificationServiceProject
         
         IAuthentificationService factory;
 
-        public ProxyClientUsers2(NetTcpBinding binding, string address) : base(binding, address)
+        public ProxyClientUsers2(NetTcpBinding binding, EndpointAddress address) : base(binding, address)
 
         {
+            this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;
+            this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ClientCertValidator();
+            this.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+
+            this.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice");
+
             factory = this.CreateChannel();
+
         }
 
       

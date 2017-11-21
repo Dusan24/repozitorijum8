@@ -30,8 +30,7 @@ namespace ClientUsers
 
 
             
-                p.Login("user1","pas1");
-                p.Logout("user1");
+                
 
                 switch (choice)
                 {
@@ -41,7 +40,7 @@ namespace ClientUsers
                         Console.WriteLine("Enter password: ");
                         string b = Console.ReadLine();
                         
-                        if (p.Login(a, b)==true)
+                        if (p.Login(a, b))
                         {
                             LoggedIn = a;
                             Console.WriteLine("User logged in successfully.");
@@ -56,7 +55,7 @@ namespace ClientUsers
    
                     case 2:
 
-                        if (p.Logout(LoggedIn) == true)
+                        if (p.Logout(LoggedIn))
                         {
                             Console.WriteLine("User logged out successfully.");
                             LoggedIn = "";
