@@ -18,9 +18,11 @@ namespace CredentialStoreProject
             NetTcpBinding binding = new NetTcpBinding();
             ServiceHost host1 = new ServiceHost(typeof(CredentialService));
             host1.AddServiceEndpoint(typeof(IAccountManagement), binding, ServiceAddresses.CredentialServiceAddress);
+            
+            host1.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
             host1.Open();
 
-            
+
 
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));
