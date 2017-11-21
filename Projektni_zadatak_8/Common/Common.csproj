@@ -56,7 +56,6 @@
     <Compile Include="User.cs" />
     <Compile Include="IAccountManagement.cs" />
     <Compile Include="IAuthentificationService.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
