@@ -41,7 +41,6 @@ namespace CredentialStoreProject
             User us;
             if (CredentialService.users.TryGetValue(username, out us))
             {
-                us.Loged = true;
                 us.Loged = false;
                 return true;
             }
