@@ -10,6 +10,7 @@ namespace AutentificationServiceProject
 {
     class AuthentificationService : IAuthentificationService
     {
+
         ProxyClientUsers2 p = new ProxyClientUsers2(new NetTcpBinding(), ServiceAddresses.CA);
         Dictionary<string, User> users = new Dictionary<string, User>();
 
