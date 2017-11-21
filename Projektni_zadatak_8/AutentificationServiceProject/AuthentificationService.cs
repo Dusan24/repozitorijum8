@@ -4,25 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using System.ServiceModel;
 
 namespace AutentificationServiceProject
 {
     class AuthentificationService : IAuthentificationService
     {
 
+        ProxyClientUsers2 p = new ProxyClientUsers2(new NetTcpBinding(), ServiceAddresses.CA);
+        Dictionary<string, User> users = new Dictionary<string, User>();
 
         public bool Login(string username, string password)
         {
-
-            Console.WriteLine("Hello.");
-            return true;
+            return p.Login(username,password);
         }
 
         public bool Logout(string username)
         {
 
-            Console.WriteLine("Hello.");
-            return true;
+
+            return p.Logout(username);
         }
 
         

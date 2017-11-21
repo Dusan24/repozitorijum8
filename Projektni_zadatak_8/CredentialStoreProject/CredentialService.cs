@@ -28,16 +28,13 @@ namespace CredentialStoreProject
             }
             else
             {
-                return new Dictionary<string, User>(); ;
+                return new Dictionary<string, User>(); 
             }
         }
 
 
         public bool CreateAccount(string username, string password)
-        {
-
-           
-         
+        {         
             
             if (!users.ContainsKey(username))
             {

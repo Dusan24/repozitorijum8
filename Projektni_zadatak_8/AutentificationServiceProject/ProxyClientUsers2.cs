@@ -6,15 +6,16 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientUsers
+namespace AutentificationServiceProject
 {
 
-    public class ProxyClientUsers : ChannelFactory<IAuthentificationService>, IAuthentificationService
+    public class ProxyClientUsers2 : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
+       
         
         IAuthentificationService factory;
 
-        public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)
+        public ProxyClientUsers2(NetTcpBinding binding, string address) : base(binding, address)
 
         {
             factory = this.CreateChannel();
