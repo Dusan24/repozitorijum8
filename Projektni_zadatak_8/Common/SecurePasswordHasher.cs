@@ -12,6 +12,11 @@ namespace Common
 
 
         private const int SaltSize = 16;
+		
+
+
+       
+
 
     
         public static string Hash(string password)
@@ -43,6 +48,7 @@ namespace Common
         
 
        
+			 }
 
         public static bool Verify(string password, string hashedPassword)
         {
@@ -58,6 +64,7 @@ namespace Common
 
 
             string hashedpasword2 = hashedPassword.Substring(0, hashedPassword.Length - SaltSize - 8);
+
 
 
             return hashedpasword1 == hashedpasword2;

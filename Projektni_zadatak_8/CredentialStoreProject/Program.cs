@@ -39,6 +39,7 @@ namespace CredentialStoreProject
 
 
             host1.Close();
+            host2.Close();
 
         }
     }

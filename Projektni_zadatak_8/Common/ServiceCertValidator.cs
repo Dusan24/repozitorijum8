@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Text;
