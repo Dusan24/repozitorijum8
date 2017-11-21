@@ -29,7 +29,8 @@ namespace ClientUsers
                 p.Login(a,b);
 
             
-                
+                p.Login("user1","pas1");
+                p.Logout("user1");
 
                 Console.ReadKey();
             }
