@@ -28,11 +28,11 @@ namespace ClientAdmins
                 Console.WriteLine("3.LockAccount");
                 Console.WriteLine("4.EnableAccount");
                 Console.WriteLine("5.DisableAccount");
-                Console.WriteLine("Finish application ");
+                Console.WriteLine("**********************");
 
 
                 int choice =Convert.ToInt32(Console.ReadLine());
-
+                
                 switch (choice)
                 {
 
