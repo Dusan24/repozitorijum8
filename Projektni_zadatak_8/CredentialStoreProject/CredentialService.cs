@@ -29,12 +29,18 @@ namespace CredentialStoreProject
             }
             else
             {
+<<<<<<< HEAD
 
                 fs.Close();
                 return new Dictionary<string, User>(); 
 
                 
 
+=======
+                fs.Close();
+                return new Dictionary<string, User>(); 
+                return new Dictionary<string, User>(); ;
+>>>>>>> 82f1a472613c088307f0d8641e7b0e69d9631024
             }
 
             
