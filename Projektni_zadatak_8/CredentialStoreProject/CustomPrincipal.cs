@@ -4,31 +4,38 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using static CredentialStoreProject.RolesConfig;
+
 
 namespace CredentialStoreProject
 {
     public class CustomPrincipal : IPrincipal
     {
 
-        public List<string> roles = new List<string>();
-        public List<string> permissions = new List<string>();
+        //public List<string> roles = new List<string>();
+        //public List<string> permissions = new List<string>();
 
 
+        string[] AccountAdmins = new string[] {"CreateAccount", "DeleteAccount", "LockAccount", "EnableAccount", "DisableAccount" };
+        //string[] UserPermissions = new string[] { "AccountUsers", "Login", "Logout" };
+        string[] AccountUsers = new string[] { "Login", "Logout" };
+
+        public Dictionary<string, string[]> admin = new Dictionary<string, string[]>();
+        public Dictionary<string, string[]> user = new Dictionary<string, string[]>();
+
+        
+       
         public CustomPrincipal(WindowsIdentity wi)
         {
             foreach (var g in wi.Groups)
             {
-                var s = GetValue(g.Value);
+                user.Add("AccountUsers", AccountUsers);
+                admin.Add("AccountAdmins", AccountAdmins);
 
-                if(s.Count()!=0)
-                {
-                    roles.Add(g.Value);
-                    foreach(var s1 in s)
-                    {
-                        permissions.Add(s1);
-                    }
-                }
+                var s = AccountAdmins;
+                var sss = AccountUsers;
+                   
+                 
+                
             }
 
         }
