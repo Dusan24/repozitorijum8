@@ -1,9 +1,11 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Policy;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,15 @@ namespace CredentialStoreProject
             host1.AddServiceEndpoint(typeof(IAccountManagement), binding, ServiceAddresses.CredentialServiceAddress);
             
             host1.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
+            
+            List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
+            policies.Add(new CustomAuthorizationPolicy());
+            host1.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
+            host1.Authorization.PrincipalPermissionMode = System.ServiceModel.Description.PrincipalPermissionMode.Custom;
+
+            host1.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            host1.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
             host1.Open();
-
-
 
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));

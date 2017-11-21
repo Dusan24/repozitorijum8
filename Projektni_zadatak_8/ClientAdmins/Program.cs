@@ -20,13 +20,10 @@ namespace ClientAdmins
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb, ServiceAddresses.CredentialServiceAddress))
             {
 
-<<<<<<< HEAD
-                while (true)
-=======
+
 
                 while(true)
 
->>>>>>> f737c04a637b9e30d84160a93e8a0e3bb5c858f4
                 {
 
                     Console.WriteLine("**********************");
