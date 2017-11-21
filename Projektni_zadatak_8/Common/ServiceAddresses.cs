@@ -8,10 +8,16 @@ namespace Common
 {
     public static class ServiceAddresses
     {
+<<<<<<< HEAD
         public const  string CredentialServiceAddress = "net.tcp://localhost:9999/CredentialService";
      
 
         public const string AuthentificationServiceAddress = "net.tcp://localhost:27016/AuthentificationService";
 
+=======
+        public const  string CredentialServiceAddress = "net.tcp://localhost:27016/CredentialService";
+        public const string AuthentificationServiceAddress = "net.tcp://localhost:28016/AuthentificationService";
+        public const string CA= "net.tcp://localhost:29016/CAService";
+>>>>>>> e1aa9771cc2e35769a156ee8650eeb09399fc558
     }
 }
