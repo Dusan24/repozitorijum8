@@ -22,6 +22,10 @@ namespace CredentialStoreProject
             host1.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
             host1.Open();
 
+<<<<<<< HEAD
+=======
+            
+>>>>>>> ac2cf890933e16a83f4b056f0c28d4f7963cc83d
 
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));
