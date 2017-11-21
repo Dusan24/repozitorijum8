@@ -24,8 +24,9 @@ namespace ClientAdmins
             try
             {
                 result = factory.CreateAccount(username, password);
-                return result;
                 Console.WriteLine("Account created succesfully");
+                return result;
+                
             }
             catch (Exception e)
             {
@@ -40,8 +41,9 @@ namespace ClientAdmins
             try
             {
                 result = factory.DeleteAccount(username);
-                return result;
                 Console.WriteLine("Account delete succesfully");
+                return result;
+                
             }
             catch (Exception e)
             {
@@ -60,9 +62,9 @@ namespace ClientAdmins
             {
 
                 result = factory.LockAccount(username);
-
-                return result;
                 Console.WriteLine("Account locked succesfully");
+                return result;
+                
             }
             catch (Exception e)
             {
@@ -77,8 +79,9 @@ namespace ClientAdmins
             try
             {
                 result = factory.EnableAccount(username);
-                return result;
                 Console.WriteLine("Account enabled succesfully");
+                return result;
+                
             }
             catch (Exception e)
             {
@@ -97,10 +100,10 @@ namespace ClientAdmins
 
 
                 result = factory.DisableAccount(username);
-
+                Console.WriteLine("Account disabled successfully");
                 return result;
 
-                Console.WriteLine("Account disabled successfully");
+                
             }
             catch (Exception e)
             {
