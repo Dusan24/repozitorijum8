@@ -15,7 +15,7 @@ namespace CredentialStoreProject
            IPrincipal principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as IPrincipal;
 
 
-            if (principal.IsInRole("p05-30\\Viewers"))
+            if (principal.IsInRole("p05-30\\AccountAdmins"))
             {
                 return true;
             }
