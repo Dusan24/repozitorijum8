@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace CredentialStoreProject
 {
-   
+        // klasa za upravljanje resurs fajlom koji sadrzi permisije
         public enum Permissions { CreateAccount = 0, DeleteAccount, LockAccount, EnableAccount,DisableAccount }
         public enum Roles { User = 0, Admin }
-        public class RolesConfig
+        public class RolesConfig            
         {
             private static ResourceManager resourceManager = null;
             private static ResourceSet resourceSet = null;
@@ -25,7 +25,7 @@ namespace CredentialStoreProject
                     {
                         if (ResourceManager == null)
                         {
-                            resourceManager = new ResourceManager(typeof(Resource).FullName, System.Reflection.Assembly.GetExecutingAssembly());
+                            resourceManager = new ResourceManager(typeof(RolesConfig).FullName, System.Reflection.Assembly.GetExecutingAssembly());
                         }
 
                         return resourceManager;
@@ -49,7 +49,7 @@ namespace CredentialStoreProject
                 }
             }
 
-            public static string[] GetValue(string rolename)
+            public static string[] GetValue(string rolename)        //izvlaci iz fajla
             {
                 var resource = resourceManager.GetString(rolename);
                 var retVal = resource.Split(',');
