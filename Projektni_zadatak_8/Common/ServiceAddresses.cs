@@ -14,6 +14,5 @@ namespace Common
         public const string CA= "net.tcp://localhost:8/CAService";
 
 
-
     }
 }

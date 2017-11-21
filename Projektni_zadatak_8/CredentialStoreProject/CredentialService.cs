@@ -30,8 +30,8 @@ namespace CredentialStoreProject
             else
             {
  
-                fs.Close();
-                return new Dictionary<string, User>(); 
+                
+                return new Dictionary<string, User>(); ;
  
             }
 
