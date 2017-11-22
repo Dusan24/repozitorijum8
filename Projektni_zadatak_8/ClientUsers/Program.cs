@@ -17,60 +17,67 @@ namespace ClientUsers
             using (ProxyClientUsers p = new ProxyClientUsers(tb, ServiceAddresses.AuthentificationServiceAddress))
             {
 
-                string LoggedIn = string.Empty;
 
-                Console.WriteLine("**************************");
-                Console.WriteLine("Options:");
-                Console.WriteLine("1.Login:");
-                Console.WriteLine("2.Logout:");
-                Console.WriteLine("**************************");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
- 
-
-                switch (choice)
+                while (true)
                 {
-                    case 1:
-                        Console.WriteLine("Enter username: ");
-                        string a = Console.ReadLine();
-                        Console.WriteLine("Enter password: ");
-                        string b = Console.ReadLine();
-                        
-                        if (p.Login(a, b))
-                        {
-                            LoggedIn = a;
-                            Console.WriteLine("User logged in successfully.");
-                            break;
-                        }
-                        else
-                        {
-                            LoggedIn = "";
-                            Console.WriteLine("User login failed.");
-                            break;
-                        }
-   
-                    case 2:
+                    string LoggedIn = string.Empty;
+                    Console.WriteLine("**************************");
+                    Console.WriteLine("Options:");
+                    Console.WriteLine("1.Login:");
+                    Console.WriteLine("2.Logout:");
+                    Console.WriteLine("3.Quit:");
+                    Console.WriteLine("**************************");
 
-                        if (p.Logout(LoggedIn))
-                        {
-                            Console.WriteLine("User logged out successfully.");
-                            LoggedIn = "";
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("User logout failed.");
-                            break;
-                        }
-
-                    default:
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice == 3)
+                    {
                         break;
+                    }
+
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter username: ");
+                            string a = Console.ReadLine();
+                            Console.WriteLine("Enter password: ");
+                            string b = Console.ReadLine();
+
+                            if (p.Login(a, b))
+                            {
+                                LoggedIn = a;
+                                Console.WriteLine("User logged in successfully.");
+                                break;
+                            }
+                            else
+                            {
+                                LoggedIn = "";
+                                Console.WriteLine("User login failed.");
+                                break;
+                            }
+
+                        case 2:
+
+                            if (p.Logout(LoggedIn))
+                            {
+                                Console.WriteLine("User logged out successfully.");
+                                LoggedIn = "";
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("User logout failed.");
+                                break;
+                            }
+
+                        default:
+                            break;
 
 
+                    }
                 }
 
-
-                Console.ReadKey();
+                
             }
         }
     }
