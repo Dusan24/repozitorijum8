@@ -12,7 +12,7 @@ namespace Common
 
         private static EventLog customLog = null;
         const string SourceName = "SecurityManager.Audit";
-        const string LogName = "MyTest";
+        const string LogName = "MySecTest";
 
         static Audit()
         {
@@ -33,7 +33,7 @@ namespace Common
             }
         }
 
-        public void WriteEntry(string message)
+        public static void WriteEntry1(string message)
         {
             customLog.WriteEntry(message);
         }
