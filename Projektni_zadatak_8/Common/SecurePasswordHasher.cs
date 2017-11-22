@@ -31,15 +31,6 @@ namespace Common
 
             return salted_hashed_password;
 
-
-
-
-
-
-           
-
-        
-
 			 }
 
 
