@@ -13,6 +13,8 @@ namespace Common
 
         private const int SaltSize = 16;
 		
+ 
+    
         public static string Hash(string password)
         {
 
@@ -29,13 +31,17 @@ namespace Common
             string salted_hashed_password = hashed_password + salt;
 
             return salted_hashed_password;
+ 
 
 
 
         }
 
-  
+ 
 
+ 
+			 
+ 
         public static bool Verify(string password, string hashedPassword)
         {
 

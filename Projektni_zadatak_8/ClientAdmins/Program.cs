@@ -19,11 +19,10 @@ namespace ClientAdmins
 
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb, ServiceAddresses.CredentialServiceAddress))
             {
-
-
+ 
 
                 while(true)
-
+ 
                 {
 
                     Console.WriteLine("**********************");
