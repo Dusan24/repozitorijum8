@@ -30,6 +30,16 @@ namespace CredentialStoreProject
 
             host1.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host1.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
+
+            ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
+            newAudit.AuditLogLocation = AuditLogLocation.Application;
+            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+            newAudit.SuppressAuditFailure = true;
+
+            host1.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+            host1.Description.Behaviors.Add(newAudit);
+
             host1.Open();
             string rel_addr = "..\\..\\..\\..\\AutentificationServiceProject\\bin\\x86\\Debug\\AutentificationServiceProject.exe";
 
@@ -89,6 +99,14 @@ namespace CredentialStoreProject
 
             host2.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
             host2.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "credentialstore");
+
+            newAudit = new ServiceSecurityAuditBehavior();
+            newAudit.AuditLogLocation = AuditLogLocation.Application;
+            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+            newAudit.SuppressAuditFailure = true;
+
+            host2.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+            host2.Description.Behaviors.Add(newAudit);
 
             host2.Open();
             Console.WriteLine("Press any key to exit...");

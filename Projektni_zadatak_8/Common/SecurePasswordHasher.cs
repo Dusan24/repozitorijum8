@@ -32,6 +32,7 @@ namespace Common
 
             return salted_hashed_password;
  
+        }
 
 			 }
 
@@ -41,7 +42,6 @@ namespace Common
         
 
 
-			 
  
         public static bool Verify(string password, string hashedPassword)
         {

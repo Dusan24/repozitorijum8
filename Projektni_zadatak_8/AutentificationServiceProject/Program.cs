@@ -23,6 +23,13 @@ namespace AutentificationServiceProject
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);
 
+            ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
+            newAudit.AuditLogLocation = AuditLogLocation.Application;
+            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+            newAudit.SuppressAuditFailure = true;
+
+            host.Description.Behaviors.Remove<System.ServiceModel.Description.ServiceSecurityAuditBehavior>();
+            host.Description.Behaviors.Add(newAudit);
             host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
 
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
