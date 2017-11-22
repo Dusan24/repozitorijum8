@@ -12,16 +12,16 @@ namespace ClientUsers
         static void Main(string[] args)
         {
             NetTcpBinding tb = new NetTcpBinding();
-
+            
 
             using (ProxyClientUsers p = new ProxyClientUsers(tb, ServiceAddresses.AuthentificationServiceAddress))
             {
 
-
+                string LoggedIn = string.Empty;
 
                 while (true)
                 {
-                    string LoggedIn = string.Empty;
+                   
                     Console.WriteLine("**************************");
                     Console.WriteLine("Options:");
                     Console.WriteLine("1.Login:");

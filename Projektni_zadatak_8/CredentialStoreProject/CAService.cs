@@ -34,7 +34,15 @@ namespace CredentialStoreProject
                     {
                         us.Locked = true;
                         Console.WriteLine("User is locked");
-                        Thread.Sleep(300000);
+                        Task t = new Task(() =>
+                        {
+                            Thread.Sleep(300000);
+                            us.Locked = false;
+                            
+                        });
+                        t.Start();
+
+                        
                     }
 					return false;
 				}

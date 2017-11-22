@@ -32,7 +32,21 @@ namespace CredentialStoreProject
             host1.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
             host1.Open();
             string rel_addr = "..\\..\\..\\..\\AutentificationServiceProject\\bin\\x86\\Debug\\AutentificationServiceProject.exe";
-            System.Diagnostics.Process.Start(rel_addr);
+
+            Process pAtuh = new Process();
+            pAtuh.StartInfo.UseShellExecute = false;
+            System.Security.SecureString ss = new System.Security.SecureString();
+            pAtuh.StartInfo.FileName = rel_addr;
+            pAtuh.StartInfo.UserName = "Administrator";
+            string pass = "student";
+            for (int x = 0; x < pass.Length; x++)
+            {
+                ss.AppendChar(pass[x]);
+            }
+            pass = "";
+            pAtuh.StartInfo.Password = ss;
+            pAtuh.Start();
+            //Start(rel_addr);
              Console.WriteLine("CredentialStore service started...");
 
             Process pAdmin = new Process();
@@ -77,12 +91,18 @@ namespace CredentialStoreProject
             host2.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "credentialstore");
 
             host2.Open();
-
+            Console.WriteLine("Press any key to exit...");
             Console.ReadLine();
-
+            
 
             host1.Close();
             host2.Close();
+
+            pAtuh.Kill();
+            pAdmin.Kill();
+            pUser.Kill();
+            
+
 
         }
     }
