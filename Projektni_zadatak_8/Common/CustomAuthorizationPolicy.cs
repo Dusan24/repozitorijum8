@@ -5,13 +5,13 @@ using System.IdentityModel.Policy;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace CredentialStoreProject
+namespace Common
 {
     public class CustomAuthorizationPolicy : IAuthorizationPolicy
     {
-
         private string id;
         private object locker = new object();
 
@@ -22,26 +22,12 @@ namespace CredentialStoreProject
 
         public string Id
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
         }
 
         public ClaimSet Issuer
         {
-            get
-            {
-                return ClaimSet.System;
-            }
-        }
-
-        ClaimSet IAuthorizationPolicy.Issuer
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return ClaimSet.System; }
         }
 
         public bool Evaluate(EvaluationContext evaluationContext, ref object state)
@@ -63,14 +49,25 @@ namespace CredentialStoreProject
             return true;
         }
 
-        protected IPrincipal GetPrincipal(IIdentity identity)
+        protected virtual IPrincipal GetPrincipal(IIdentity identity)
         {
             lock (locker)
             {
-                CustomPrincipal cPrincipal = null;
-                cPrincipal = new CustomPrincipal((WindowsIdentity)identity);
 
-                return cPrincipal;
+                //tu autentifikacija
+                IPrincipal principal = null;
+                WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+                if (windowsIdentity != null)
+                {
+                    /// audit successfull authentication	
+                    /// 
+                    string username = Thread.CurrentPrincipal.Identity.Name;
+                    principal = new CustomPrincipal(windowsIdentity);
+
+                }
+
+                return principal;
             }
         }
     }

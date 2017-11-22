@@ -68,7 +68,11 @@
   <ItemGroup>
     <Compile Include="CertManager.cs" />
     <Compile Include="ClientCertValidator.cs" />
+    <Compile Include="CustomAuthorizationManager.cs" />
+    <Compile Include="CustomAuthorizationPolicy.cs" />
+    <Compile Include="CustomPrincipal.cs" />
     <Compile Include="Formatter.cs" />
+    <Compile Include="RolesConfig.cs" />
     <Compile Include="SecurePasswordHasher.cs" />
     <Compile Include="ServiceAddresses.cs" />
     <Compile Include="ServiceCertValidator.cs" />
