@@ -38,11 +38,9 @@ namespace Common
 
 
 
-        }
+        
 
- 
 
- 
 			 
  
         public static bool Verify(string password, string hashedPassword)

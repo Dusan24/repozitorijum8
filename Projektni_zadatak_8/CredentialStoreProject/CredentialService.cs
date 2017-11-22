@@ -39,10 +39,7 @@ namespace CredentialStoreProject
                 return new Dictionary<string, User>(); 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 19a86626caddf1f869d49f883abb6bd27e0ac9ec
             }
 
             
