@@ -22,7 +22,6 @@ namespace ClientAdmins
  
 
                 while(true)
- 
                 {
 
                     Console.WriteLine("**********************");
@@ -37,7 +36,7 @@ namespace ClientAdmins
 
                     int choice;
                     bool parsed, in_range;
-                    //int choice = Convert.ToInt32(Console.ReadLine());
+      
                     do
                     {
                         do
