@@ -32,7 +32,7 @@ namespace CredentialStoreProject
 			}
 			else
 			{
-				Console.WriteLine("User doesn't exist.");
+				Console.WriteLine("[LOGIN]User doesn't exist.");
 				return false;
 			}
 		}
@@ -47,7 +47,7 @@ namespace CredentialStoreProject
 			}
 			else
 			{
-				Console.WriteLine("User doesnt exist.");
+				Console.WriteLine("[LOGOUT]User doesnt exist.");
 				return false;
 			}
 
