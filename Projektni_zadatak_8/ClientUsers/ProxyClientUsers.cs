@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ClientUsers
@@ -25,17 +26,21 @@ namespace ClientUsers
         public bool Login(string username, string password)
         {
             bool result;
-            try
-            {
-                result = factory.Login(username, password);
-                return result;
+            
+                try
+                {
+                    result = factory.Login(username, password);
+                    if (result)
+                        Console.WriteLine("Login successful");
+                    return result;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: {0}", e.Message);
+                    return false;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: {0}", e.Message);
-                return false;
-            }
-        }
+        
 
         public bool Logout(string username)
         {

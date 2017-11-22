@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Common;
 using System.ServiceModel;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace AutentificationServiceProject
 {
@@ -28,14 +29,40 @@ namespace AutentificationServiceProject
 
         public bool Login(string username, string password)
         {
-            return p.Login(username,password);
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            bool result = false;
+
+            if (principal.IsInRole(Permissions.Login.ToString()))
+            {
+
+                result = p.Login(username, password);
+            }
+            else
+            {
+                Console.WriteLine("User not authorized!");
+                result = false;
+            }
+
+            return result;
         }
 
         public bool Logout(string username)
         {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            bool result = false;
 
+            if (principal.IsInRole(Permissions.Logout.ToString()))
+            {
 
-            return p.Logout(username);
+                result =  p.Logout(username);
+
+            }
+            else
+            {
+                Console.WriteLine("User not authorized!");
+                result = false;
+            }
+            return result;
         }
 
         

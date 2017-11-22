@@ -31,7 +31,9 @@ namespace CredentialStoreProject
             host1.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host1.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
             host1.Open();
-            Console.WriteLine("CredentialStore service started...");
+            string rel_addr = "..\\..\\..\\..\\AutentificationServiceProject\\bin\\x86\\Debug\\AutentificationServiceProject.exe";
+            System.Diagnostics.Process.Start(rel_addr);
+             Console.WriteLine("CredentialStore service started...");
 
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));
