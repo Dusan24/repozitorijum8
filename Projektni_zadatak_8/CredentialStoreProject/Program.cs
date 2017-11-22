@@ -31,6 +31,7 @@ namespace CredentialStoreProject
             host1.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host1.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
             host1.Open();
+            Console.WriteLine("CredentialStore service started...");
 
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));

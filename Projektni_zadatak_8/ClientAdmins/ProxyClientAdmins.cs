@@ -24,7 +24,8 @@ namespace ClientAdmins
             try
             {
                 result = factory.CreateAccount(username, password);
-                Console.WriteLine("Account created succesfully");
+                if(result)
+                    Console.WriteLine("Account created succesfully");
                 return result;
                 
             }
@@ -41,7 +42,8 @@ namespace ClientAdmins
             try
             {
                 result = factory.DeleteAccount(username);
-                Console.WriteLine("Account delete succesfully");
+                if (result)
+                    Console.WriteLine("Account deleted succesfully");
                 return result;
                 
             }
@@ -60,9 +62,10 @@ namespace ClientAdmins
             bool result;
             try
             {
-
-                result = factory.LockAccount(username);
-                Console.WriteLine("Account locked succesfully");
+                
+                    result = factory.LockAccount(username);
+                if (result)
+                    Console.WriteLine("Account locked succesfully");
                 return result;
                 
             }
@@ -78,8 +81,10 @@ namespace ClientAdmins
             bool result;
             try
             {
-                result = factory.EnableAccount(username);
-                Console.WriteLine("Account enabled succesfully");
+                
+                    result = factory.EnableAccount(username);
+                if (result)
+                    Console.WriteLine("Account enabled succesfully");
                 return result;
                 
             }
@@ -98,9 +103,10 @@ namespace ClientAdmins
             try
             {
 
-
-                result = factory.DisableAccount(username);
-                Console.WriteLine("Account disabled successfully");
+                
+                    result = factory.DisableAccount(username);
+                if (result)
+                    Console.WriteLine("Account disabled successfully");
                 return result;
 
                 

@@ -4,6 +4,7 @@ using System.Resources;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace CredentialStoreProject
 {
@@ -49,114 +50,168 @@ namespace CredentialStoreProject
 
 
         public bool CreateAccount(string username, string password)
-        {         
-            
-            if (!users.ContainsKey(username))
+        {
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+
+
+            if (principal.IsInRole(Permissions.CreateAccount.ToString()))
             {
-                
-                User a = new User(username, password);
-                users.Add(a.Username,a);
-                FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fs,users);
-                fs.Close();
-                return true;
+                if (!users.ContainsKey(username))
+                {
+
+                    User a = new User(username, password);
+                    users.Add(a.Username, a);
+                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(fs, users);
+                    fs.Close();
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
             }
             else
             {
-               
+                Console.WriteLine("Current user not authorized!");
                 return false;
             }
         }
 
         public bool DeleteAccount(string username)
         {
-            if (users.ContainsKey(username))
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+
+
+            if (principal.IsInRole(Permissions.DeleteAccount.ToString()))
             {
-                users.Remove(username);
-                FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(fs, users);
-                fs.Close();
-                return true;
+                    if (users.ContainsKey(username))
+                    {
+                        users.Remove(username);
+                        FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(fs, users);
+                        fs.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
             }
             else
             {
+                Console.WriteLine("Current user not authorized!");
                 return false;
             }
-        }
+}
 
         public bool DisableAccount(string username)
         {
-            if(users.ContainsKey(username))
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+
+
+            if (principal.IsInRole(Permissions.DisableAccount.ToString()))
             {
-                if(users[username].Enabled == true)
+                if (users.ContainsKey(username))
                 {
-                    users[username].Enabled = false;
-                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, users);
-                    fs.Close();
-                    return true;
+                    if(users[username].Enabled == true)
+                    {
+                        users[username].Enabled = false;
+                        FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(fs, users);
+                        fs.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+
+                    return false;
                 }
             }
             else
             {
-
+                Console.WriteLine("Current user not authorized!");
                 return false;
             }
         }
 
         public bool EnableAccount(string username)
         {
-            if (users.ContainsKey(username))
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+
+
+            if (principal.IsInRole(Permissions.EnableAccount.ToString()))
             {
-                if (users[username].Enabled == false)
+                if (users.ContainsKey(username))
                 {
-                    users[username].Enabled = true;
-                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, users);
-                    fs.Close();
-                    return true;
+                    if (users[username].Enabled == false)
+                    {
+                        users[username].Enabled = true;
+                        FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(fs, users);
+                        fs.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+
+                    return false;
                 }
             }
             else
             {
-
+                Console.WriteLine("Current user not authorized!");
                 return false;
             }
         }
 
         public bool LockAccount(string username)
         {
-            if (users.ContainsKey(username))
+            CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+
+
+            if (principal.IsInRole(Permissions.LockAccount.ToString()))
             {
-                if (users[username].Locked == false)
+                if (users.ContainsKey(username))
                 {
-                    users[username].Locked = true;
-                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, users);
-                    fs.Close();
-                    return true;
+                    if (users[username].Locked == false)
+                    {
+                        users[username].Locked = true;
+                        FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(fs, users);
+                        fs.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+
+                    return false;
                 }
             }
             else
             {
-
+                Console.WriteLine("Current user not authorized!");
                 return false;
             }
         }
