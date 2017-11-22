@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using Common;
+using System.ServiceModel.Description;
 
 namespace AutentificationServiceProject
 {
@@ -26,6 +27,13 @@ namespace AutentificationServiceProject
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);
 
+            ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
+            newAudit.AuditLogLocation = AuditLogLocation.Application;
+            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+            newAudit.SuppressAuditFailure = true;
+
+            host.Description.Behaviors.Remove<System.ServiceModel.Description.ServiceSecurityAuditBehavior>();
+            host.Description.Behaviors.Add(newAudit);
 
             host.Open();
 
