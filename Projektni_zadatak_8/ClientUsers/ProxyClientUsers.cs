@@ -6,22 +6,42 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace ClientUsers
 {
 
     public class ProxyClientUsers : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
-        
+
+        byte[] key;
         IAuthentificationService factory;
 
         public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)
 
         {
             factory = this.CreateChannel();
+            RSACryptoServiceProvider rsa = GetPublicKey();
+            new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
+            byte[] encrypted_key = rsa.Encrypt(key,false);
+            SendKey(encrypted_key);
         }
 
-      
+        public RSACryptoServiceProvider GetPublicKey()
+        {
+            try
+            {
+                RSACryptoServiceProvider result = factory.GetPublicKey();
+                if (result!=null)
+                    Console.WriteLine("Get public key successful");
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return null;
+            }
+        }
 
         public bool Login(string username, string password)
         {
@@ -48,6 +68,21 @@ namespace ClientUsers
             try
             {
                 result = factory.Logout(username);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return false;
+            }
+        }
+
+        public bool SendKey(byte[] key)
+        {
+            bool result;
+            try
+            {
+                result = factory.SendKey(key);
                 return result;
             }
             catch (Exception e)

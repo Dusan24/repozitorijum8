@@ -31,18 +31,12 @@ namespace Common
             string salted_hashed_password = hashed_password + salt;
 
             return salted_hashed_password;
- 
-        }
+
 
 			 }
 
 
 
-
-        
-
-
- 
         public static bool Verify(string password, string hashedPassword)
         {
 

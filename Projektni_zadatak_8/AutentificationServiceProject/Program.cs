@@ -30,6 +30,7 @@ namespace AutentificationServiceProject
 
             host.Description.Behaviors.Remove<System.ServiceModel.Description.ServiceSecurityAuditBehavior>();
             host.Description.Behaviors.Add(newAudit);
+
             host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
 
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
@@ -39,6 +40,7 @@ namespace AutentificationServiceProject
 
             host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
 
 
             host.Open();

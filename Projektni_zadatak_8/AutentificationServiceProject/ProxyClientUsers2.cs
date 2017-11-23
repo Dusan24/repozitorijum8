@@ -6,14 +6,15 @@ using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace AutentificationServiceProject
 {
 
     public class ProxyClientUsers2 : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
+
        
-        
         IAuthentificationService factory;
 
         public ProxyClientUsers2(NetTcpBinding binding, EndpointAddress address) : base(binding, address)
@@ -29,7 +30,11 @@ namespace AutentificationServiceProject
 
         }
 
-      
+        public RSACryptoServiceProvider GetPublicKey()
+        {
+            throw new NotImplementedException();
+        }
+            
 
         public bool Login(string username, string password)
         {
@@ -59,6 +64,11 @@ namespace AutentificationServiceProject
                 Console.WriteLine("Error: {0}", e.Message);
                 return false;
             }
+        }
+
+        public bool SendKey(byte[] key)
+        {
+            throw new NotImplementedException();
         }
     }
 }

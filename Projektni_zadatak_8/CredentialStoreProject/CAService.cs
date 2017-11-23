@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Security.Cryptography;
 
 namespace CredentialStoreProject
 {
 	class CAService : IAuthentificationService
 	{
+        public RSACryptoServiceProvider GetPublicKey()
+        {
+            throw new NotImplementedException();
+        }
 
-
-
-		public bool Login(string username, string password)
+        public bool Login(string username, string password)
 		{
 			User us;
 			if (CredentialService.users.TryGetValue(username, out us))
@@ -70,6 +72,11 @@ namespace CredentialStoreProject
 
 
 		}
-		}
+
+        public bool SendKey(byte[] key)
+        {
+            throw new NotImplementedException();
+        }
+    }
 	}
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using System.Security.Cryptography;
 
 namespace Common
 {
@@ -15,6 +16,11 @@ namespace Common
 
         [OperationContract]
         bool Logout(string username);
+        [OperationContract]
+        RSACryptoServiceProvider GetPublicKey();
+
+        [OperationContract]
+        bool SendKey(byte[] key);
     }
 }
 
