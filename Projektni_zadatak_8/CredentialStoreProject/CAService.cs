@@ -9,47 +9,30 @@ using System.Security.Cryptography;
 
 namespace CredentialStoreProject
 {
-<<<<<<< HEAD
+
 
     class CAService : IAuthentificationService
     {
-        public RSACryptoServiceProvider GetPublicKey()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public bool Login(string username, string password)
         {
             User us;
             if (CredentialService.users.TryGetValue(username, out us))
             {
-                if (!us.Locked)
+                if (SecurePasswordHasher.Verify(password, us.Password))
                 {
-                    if (SecurePasswordHasher.Verify(password, us.Password))
-
-=======
-	class CAService : IAuthentificationService
-	{
-        
-
-        public bool Login(string username, string password)
-		{
-			User us;
-			if (CredentialService.users.TryGetValue(username, out us))
-			{
-				if (SecurePasswordHasher.Verify(password, us.Password))
-				{
-					Console.WriteLine("Login successful.");
-					us.Loged = true;
+                    Console.WriteLine("Login successful.");
+                    us.Loged = true;
                     us.Count = 0;
-					return true;
-				}
-				else
-				{
+                    return true;
+                }
+                else
+                {
                     us.Count++;
-					Console.WriteLine("Login not successful.");
-                    if(us.Count >= 5)
->>>>>>> d905c7facbd1f0339dcdb0513108f9fc20f41fbd
+                    Console.WriteLine("Login not successful.");
+                    if (us.Count >= 5)
+
                     {
                         us.Locked = true;
                         Console.WriteLine("User is locked");
@@ -57,53 +40,54 @@ namespace CredentialStoreProject
                         {
                             Thread.Sleep(300000);
                             us.Locked = false;
-                            
+
                         });
                         t.Start();
 
-                        
+
                     }
-					return false;
-				}
-			}
-			else
-			{
-				Console.WriteLine("[LOGIN]User doesn't exist.");
-				return false;
-			}
-		}
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("[LOGIN]User doesn't exist.");
+                return false;
+            }
+        }
 
-		public bool Logout(string username)
-		{
-			User us;
-			if (CredentialService.users.TryGetValue(username, out us))
-			{
-				us.Loged = false;
-				return true;
-			}
-			else
-			{
-				Console.WriteLine("[LOGOUT]User doesnt exist.");
-				return false;
-			}
+        public bool Logout(string username)
+        {
+            User us;
+            if (CredentialService.users.TryGetValue(username, out us))
+            {
+                us.Loged = false;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("[LOGOUT]User doesnt exist.");
+                return false;
+            }
 
 
-		}
+        }
 
         public bool SendKey(byte[] key)
         {
             throw new NotImplementedException();
         }
-    }
-	}
 
-        
+
+
+
 
 
         string IAuthentificationService.GetPublicKey()
         {
             throw new NotImplementedException();
         }
-    }
-	}
 
+
+    }
+}
