@@ -28,14 +28,14 @@ namespace AutentificationServiceProject
             newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
             newAudit.SuppressAuditFailure = true;
 
-            host.Description.Behaviors.Remove<System.ServiceModel.Description.ServiceSecurityAuditBehavior>();
+            host.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
             host.Description.Behaviors.Add(newAudit);
             host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
 
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
             policies.Add(new CustomAuthorizationPolicy());
             host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
-            host.Authorization.PrincipalPermissionMode = System.ServiceModel.Description.PrincipalPermissionMode.Custom;
+            host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
             host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
