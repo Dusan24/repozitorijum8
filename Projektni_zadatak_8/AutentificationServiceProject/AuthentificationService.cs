@@ -40,11 +40,12 @@ namespace AutentificationServiceProject
 
             if (principal.IsInRole(Permissions.Login.ToString()))
             {
-
+                Audit.WriteEntry1("[LOGIN]Authorization successful.");
                 result = p.Login(username, password);
             }
             else
             {
+                Audit.WriteEntry1("[LOGIN]Authorization failed");
                 Console.WriteLine("User not authorized!");
                 result = false;
             }

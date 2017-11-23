@@ -46,7 +46,7 @@ namespace ClientUsers
                             if (p.Login(a, b))
                             {
                                 LoggedIn = a;
-                                Console.WriteLine("User logged in successfully.");
+                                Console.WriteLine("User {0} logged in successfully.",LoggedIn);
                                 break;
                             }
                             else
@@ -60,7 +60,7 @@ namespace ClientUsers
 
                             if (p.Logout(LoggedIn))
                             {
-                                Console.WriteLine("User logged out successfully.");
+                                Console.WriteLine("User {0} logged out successfully.",LoggedIn);
                                 LoggedIn = "";
                                 break;
                             }
