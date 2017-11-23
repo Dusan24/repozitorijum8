@@ -21,17 +21,19 @@ namespace ClientUsers
 
         {
             factory = this.CreateChannel();
-            RSACryptoServiceProvider rsa = GetPublicKey();
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.FromXmlString(GetPublicKey());
             new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
             byte[] encrypted_key = rsa.Encrypt(key,false);
             SendKey(encrypted_key);
+           
         }
 
-        public RSACryptoServiceProvider GetPublicKey()
+        public string GetPublicKey()
         {
             try
             {
-                RSACryptoServiceProvider result = factory.GetPublicKey();
+                string result = factory.GetPublicKey();
                 if (result!=null)
                     Console.WriteLine("Get public key successful");
                 return result;

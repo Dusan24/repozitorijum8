@@ -30,11 +30,10 @@ namespace AutentificationServiceProject
 
         }
 
-        public RSACryptoServiceProvider GetPublicKey()
+        public string GetPublicKey()
         {
             throw new NotImplementedException();
         }
-            
 
         public bool Login(string username, string password)
         {
