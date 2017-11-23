@@ -21,30 +21,17 @@ namespace ClientUsers
         public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)
 
         {
+           
             factory = this.CreateChannel();
 
-            RSACryptoServiceProvider rsa =(RSACryptoServiceProvider) GetCertificate().Key;
+            RSACryptoServiceProvider rsa =(RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key;
             new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
             byte[] encrypted_key = rsa.Encrypt(key,false);
             SendKey(encrypted_key);
          
         }
 
-        public PublicKey GetCertificate()
-        {
-            try
-            {
-                PublicKey result = factory.GetCertificate();
-                if (result!=null)
-                    Console.WriteLine("Get public key successful");
-                return result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: {0}", e.Message);
-                return null;
-            }
-        }
+      
 
         public bool Login(string username, string password)
         {

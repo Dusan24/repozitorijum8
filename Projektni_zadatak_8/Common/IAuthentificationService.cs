@@ -22,8 +22,7 @@ namespace Common
         [OperationContract]
         bool SendKey(byte[] key);
 
-        [OperationContract]
-        PublicKey GetCertificate();
+     
     }
 }
 

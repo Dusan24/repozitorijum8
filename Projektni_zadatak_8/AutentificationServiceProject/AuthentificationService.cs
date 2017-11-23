@@ -76,10 +76,6 @@ namespace AutentificationServiceProject
             return true;
         }
 
-        public PublicKey GetCertificate()
-        {
-            return CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey;
-            
-        }
+       
     }
 }

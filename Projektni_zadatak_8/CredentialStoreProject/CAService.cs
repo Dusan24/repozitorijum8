@@ -79,9 +79,6 @@ namespace CredentialStoreProject
             throw new NotImplementedException();
         }
 
-        PublicKey IAuthentificationService.GetCertificate()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
