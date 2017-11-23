@@ -9,36 +9,13 @@ using System.Security.Cryptography;
 
 namespace CredentialStoreProject
 {
-<<<<<<< HEAD
-	class CAService : IAuthentificationService
-	{
+
+    class CAService : IAuthentificationService
+    {
         public RSACryptoServiceProvider GetPublicKey()
         {
             throw new NotImplementedException();
         }
-
-        public bool Login(string username, string password)
-		{
-			User us;
-			if (CredentialService.users.TryGetValue(username, out us))
-			{
-				if (SecurePasswordHasher.Verify(password, us.Password))
-				{
-					Console.WriteLine("Login successful.");
-					us.Loged = true;
-                    us.Count = 0;
-					return true;
-				}
-				else
-				{
-                    us.Count++;
-					Console.WriteLine("Login not successful.");
-                    if(us.Count >= 5)
-=======
-    class CAService : IAuthentificationService
-    {
-
-
 
         public bool Login(string username, string password)
         {
@@ -48,7 +25,7 @@ namespace CredentialStoreProject
                 if (!us.Locked)
                 {
                     if (SecurePasswordHasher.Verify(password, us.Password))
->>>>>>> 15bb75c154ed76346aadea419bd36c6e3ef53736
+
                     {
                         Console.WriteLine("Login successful.");
                         us.Loged = true;
@@ -120,7 +97,6 @@ namespace CredentialStoreProject
             }
 
 
-<<<<<<< HEAD
 		}
 
         public bool SendKey(byte[] key)
@@ -129,10 +105,7 @@ namespace CredentialStoreProject
         }
     }
 	}
-=======
-        }
-    }
-}
-	
->>>>>>> 15bb75c154ed76346aadea419bd36c6e3ef53736
+
+        
+
 
