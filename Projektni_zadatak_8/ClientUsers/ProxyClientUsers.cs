@@ -15,7 +15,7 @@ namespace ClientUsers
     public class ProxyClientUsers : ChannelFactory<IAuthentificationService>, IAuthentificationService
     {
 
-        byte[] key;
+        string key;
         IAuthentificationService factory;
 
         public ProxyClientUsers(NetTcpBinding binding, string address) : base(binding, address)
@@ -25,10 +25,11 @@ namespace ClientUsers
             factory = this.CreateChannel();
 
             RSACryptoServiceProvider rsa =(RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key;
-            new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
-            byte[] encrypted_key = rsa.Encrypt(key,false);
+            byte[] b;
+            new RNGCryptoServiceProvider().GetBytes(b = new byte[20]);
+            byte[] encrypted_key = rsa.Encrypt(b,false);
             SendKey(encrypted_key);
-         
+            key = Convert.ToBase64String(encrypted_key);
         }
 
       
@@ -39,7 +40,9 @@ namespace ClientUsers
             
                 try
                 {
-                    result = factory.Login(username, password);
+
+
+                    result = factory.Login(RC4.Encrypt(key, username), RC4.Encrypt(key, password));
                     if (result)
                         Console.WriteLine("Login successful");
                     return result;
@@ -57,7 +60,7 @@ namespace ClientUsers
             bool result;
             try
             {
-                result = factory.Logout(username);
+                result = factory.Logout(RC4.Encrypt(key, username));
                 return result;
             }
             catch (Exception e)

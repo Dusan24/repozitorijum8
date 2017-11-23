@@ -13,7 +13,7 @@ namespace AutentificationServiceProject
 {
     class AuthentificationService : IAuthentificationService
     {
-        byte[] rc4key;
+        string rc4key;
         ProxyClientUsers2 p = StartProxy();
         Dictionary<string, User> users = new Dictionary<string, User>();
        
@@ -38,7 +38,8 @@ namespace AutentificationServiceProject
             if (principal.IsInRole(Permissions.Login.ToString()))
             {
                 Audit.WriteEntry1("[LOGIN]Authorization successful.");
-                result = p.Login(username, password);
+                Console.WriteLine(RC4.Decrypt(rc4key, username));
+                result = p.Login(RC4.Decrypt(rc4key, username), RC4.Decrypt(rc4key, password));
             }
             else
             {
@@ -57,8 +58,8 @@ namespace AutentificationServiceProject
 
             if (principal.IsInRole(Permissions.Logout.ToString()))
             {
-
-                result =  p.Logout(username);
+                Console.WriteLine(RC4.Decrypt(rc4key, username));
+                result =  p.Logout(RC4.Decrypt(rc4key, username));
 
             }
             else
@@ -72,7 +73,7 @@ namespace AutentificationServiceProject
         public bool SendKey(byte[] key)
         {
             RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PrivateKey;
-            rc4key = rsa.Decrypt(key,false);
+            rc4key =Convert.ToBase64String(rsa.Decrypt(key,false));
             return true;
         }
 
