@@ -30,10 +30,7 @@ namespace AutentificationServiceProject
 
         }
 
-        public RSACryptoServiceProvider GetCertificate()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public bool Login(string username, string password)
         {
@@ -66,6 +63,11 @@ namespace AutentificationServiceProject
         }
 
         public bool SendKey(byte[] key)
+        {
+            throw new NotImplementedException();
+        }
+
+        PublicKey IAuthentificationService.GetCertificate()
         {
             throw new NotImplementedException();
         }

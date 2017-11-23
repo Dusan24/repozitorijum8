@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CredentialStoreProject
 {
@@ -13,10 +14,7 @@ namespace CredentialStoreProject
 
     class CAService : IAuthentificationService
     {
-        public RSACryptoServiceProvider GetCertificate()
-        {
-            throw new NotImplementedException();
-        }
+     
 
         public bool Login(string username, string password)
         {
@@ -81,11 +79,9 @@ namespace CredentialStoreProject
             throw new NotImplementedException();
         }
 
-
-
-
-
-
-
+        PublicKey IAuthentificationService.GetCertificate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

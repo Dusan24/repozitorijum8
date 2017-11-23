@@ -23,7 +23,7 @@ namespace Common
         bool SendKey(byte[] key);
 
         [OperationContract]
-        RSACryptoServiceProvider GetCertificate();
+        PublicKey GetCertificate();
     }
 }
 

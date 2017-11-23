@@ -76,9 +76,9 @@ namespace AutentificationServiceProject
             return true;
         }
 
-        public RSACryptoServiceProvider GetCertificate()
+        public PublicKey GetCertificate()
         {
-            return (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key;
+            return CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey;
             
         }
     }
