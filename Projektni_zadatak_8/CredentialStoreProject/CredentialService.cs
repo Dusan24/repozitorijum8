@@ -5,12 +5,15 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CredentialStoreProject
 {
     public class CredentialService : IAccountManagement
     {
         const string file_name = "data";
+        string rc4key;
         public static Dictionary<string, User> users = Load();
 
         private static Dictionary<string, User> Load()
@@ -48,13 +51,16 @@ namespace CredentialStoreProject
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
 
+            string _username = RC4.Decrypt(rc4key, username);
+            string _password = RC4.Decrypt(rc4key, password);
+          
 
             if (principal.IsInRole(Permissions.CreateAccount.ToString()))
             {
-                if (!users.ContainsKey(username))
+                if (!users.ContainsKey(_username))
                 {
 
-                    User a = new User(username, password);
+                    User a = new User(_username, _password);
                     users.Add(a.Username, a);
                     FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                     BinaryFormatter bf = new BinaryFormatter();
@@ -64,7 +70,7 @@ namespace CredentialStoreProject
                 }
                 else
                 {
-
+                    Console.WriteLine("User already exists.");
                     return false;
                 }
             }
@@ -78,13 +84,13 @@ namespace CredentialStoreProject
         public bool DeleteAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-
+            string _username = RC4.Decrypt(rc4key,username);
 
             if (principal.IsInRole(Permissions.DeleteAccount.ToString()))
             {
-                    if (users.ContainsKey(username))
+                    if (users.ContainsKey(_username))
                     {
-                        users.Remove(username);
+                        users.Remove(_username);
                         FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                         BinaryFormatter bf = new BinaryFormatter();
                         bf.Serialize(fs, users);
@@ -106,15 +112,15 @@ namespace CredentialStoreProject
         public bool DisableAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-
+            string _username = RC4.Decrypt(rc4key, username);
 
             if (principal.IsInRole(Permissions.DisableAccount.ToString()))
             {
-                if (users.ContainsKey(username))
+                if (users.ContainsKey(_username))
                 {
-                    if(users[username].Enabled == true)
+                    if(users[_username].Enabled == true)
                     {
-                        users[username].Enabled = false;
+                        users[_username].Enabled = false;
                         FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                         BinaryFormatter bf = new BinaryFormatter();
                         bf.Serialize(fs, users);
@@ -142,15 +148,15 @@ namespace CredentialStoreProject
         public bool EnableAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-
+            string _username = RC4.Decrypt(rc4key, username);
 
             if (principal.IsInRole(Permissions.EnableAccount.ToString()))
             {
-                if (users.ContainsKey(username))
+                if (users.ContainsKey(_username))
                 {
-                    if (users[username].Enabled == false)
+                    if (users[_username].Enabled == false)
                     {
-                        users[username].Enabled = true;
+                        users[_username].Enabled = true;
                         FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                         BinaryFormatter bf = new BinaryFormatter();
                         bf.Serialize(fs, users);
@@ -178,15 +184,17 @@ namespace CredentialStoreProject
         public bool LockAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
+            string _username = RC4.Decrypt(rc4key, username);
+
 
 
             if (principal.IsInRole(Permissions.LockAccount.ToString()))
             {
-                if (users.ContainsKey(username))
+                if (users.ContainsKey(_username))
                 {
-                    if (users[username].Locked == false)
+                    if (users[_username].Locked == false)
                     {
-                        users[username].Locked = true;
+                        users[_username].Locked = true;
                         FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
                         BinaryFormatter bf = new BinaryFormatter();
                         bf.Serialize(fs, users);
@@ -209,6 +217,14 @@ namespace CredentialStoreProject
                 Console.WriteLine("Current user not authorized!");
                 return false;
             }
+        }
+
+        public bool SendKey(byte[] key)
+        {
+            RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "credentialstore").PrivateKey;
+            rc4key = Convert.ToBase64String(rsa.Decrypt(key, false));
+
+            return true;
         }
     }
 }
