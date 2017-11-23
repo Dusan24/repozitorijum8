@@ -27,7 +27,7 @@ namespace ClientUsers
             new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
             byte[] encrypted_key = rsa.Encrypt(key,false);
             SendKey(encrypted_key);
-            this.Credentials.ServiceCertificate
+         
         }
 
         public string GetPublicKey()
