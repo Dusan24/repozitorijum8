@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace CredentialStoreProject
 {
@@ -18,6 +19,8 @@ namespace CredentialStoreProject
     {
         static void Main(string[] args)
         {
+
+           
 
             NetTcpBinding binding = new NetTcpBinding();
             ServiceHost host1 = new ServiceHost(typeof(CredentialService));

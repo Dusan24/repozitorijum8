@@ -25,11 +25,11 @@ namespace ClientUsers
             factory = this.CreateChannel();
 
             RSACryptoServiceProvider rsa =(RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key;
-            byte[] b;
-            new RNGCryptoServiceProvider().GetBytes(b = new byte[20]);
-            byte[] encrypted_key = rsa.Encrypt(b,false);
+            byte[] byte_key;
+            new RNGCryptoServiceProvider().GetBytes(byte_key = new byte[20]);
+            byte[] encrypted_key = rsa.Encrypt(byte_key,false);
             SendKey(encrypted_key);
-            key = Convert.ToBase64String(encrypted_key);
+            key = Convert.ToBase64String(byte_key);
         }
 
       
