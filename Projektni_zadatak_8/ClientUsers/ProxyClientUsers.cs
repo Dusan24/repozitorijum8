@@ -30,6 +30,7 @@ namespace ClientUsers
             byte[] encrypted_key = rsa.Encrypt(byte_key,false);
             SendKey(encrypted_key);
             key = Convert.ToBase64String(byte_key);
+            
         }
 
       
@@ -41,8 +42,8 @@ namespace ClientUsers
                 try
                 {
 
-
-                    result = factory.Login(RC4.Encrypt(key, username), RC4.Encrypt(key, password));
+            
+                result = factory.Login(RC4.Encrypt(key, username), RC4.Encrypt(key, password));
                     if (result)
                         Console.WriteLine("Login successful");
                     return result;

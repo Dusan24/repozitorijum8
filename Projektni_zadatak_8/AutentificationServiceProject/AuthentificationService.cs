@@ -38,7 +38,7 @@ namespace AutentificationServiceProject
             if (principal.IsInRole(Permissions.Login.ToString()))
             {
                 Audit.WriteEntry1("[LOGIN]Authorization successful.");
-                Console.WriteLine(RC4.Decrypt(rc4key, username));
+           
                 result = p.Login(RC4.Decrypt(rc4key, username), RC4.Decrypt(rc4key, password));
             }
             else
@@ -74,6 +74,7 @@ namespace AutentificationServiceProject
         {
             RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PrivateKey;
             rc4key =Convert.ToBase64String(rsa.Decrypt(key,false));
+       
             return true;
         }
 
