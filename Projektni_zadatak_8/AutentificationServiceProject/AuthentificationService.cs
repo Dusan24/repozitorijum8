@@ -16,7 +16,7 @@ namespace AutentificationServiceProject
         byte[] rc4key;
         ProxyClientUsers2 p = StartProxy();
         Dictionary<string, User> users = new Dictionary<string, User>();
-
+       
         static ProxyClientUsers2 StartProxy()
         {
             NetTcpBinding binding = new NetTcpBinding();
@@ -28,9 +28,9 @@ namespace AutentificationServiceProject
             
         }
 
-        public RSACryptoServiceProvider GetPublicKey()
+        public string GetPublicKey()
         {
-            return (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key;
+            return ((RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key).ToXmlString(false);
         }
 
         public bool Login(string username, string password)

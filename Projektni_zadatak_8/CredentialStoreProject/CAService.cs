@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 
 namespace CredentialStoreProject
 {
+<<<<<<< HEAD
 
     class CAService : IAuthentificationService
     {
@@ -26,75 +27,65 @@ namespace CredentialStoreProject
                 {
                     if (SecurePasswordHasher.Verify(password, us.Password))
 
+=======
+	class CAService : IAuthentificationService
+	{
+        
+
+        public bool Login(string username, string password)
+		{
+			User us;
+			if (CredentialService.users.TryGetValue(username, out us))
+			{
+				if (SecurePasswordHasher.Verify(password, us.Password))
+				{
+					Console.WriteLine("Login successful.");
+					us.Loged = true;
+                    us.Count = 0;
+					return true;
+				}
+				else
+				{
+                    us.Count++;
+					Console.WriteLine("Login not successful.");
+                    if(us.Count >= 5)
+>>>>>>> d905c7facbd1f0339dcdb0513108f9fc20f41fbd
                     {
-                        Console.WriteLine("Login successful.");
-                        us.Loged = true;
-                        us.Count = 0;
-                        return true;
-                    }
-                    else
-                    {
-                        us.Count++;
-                        Audit.WriteEntry1("[LOGIN]Wrong password!");
-                        Console.WriteLine("Login not successful.");
-                        if (us.Count >= 2)
+                        us.Locked = true;
+                        Console.WriteLine("User is locked");
+                        Task t = new Task(() =>
                         {
+                            Thread.Sleep(300000);
+                            us.Locked = false;
+                            
+                        });
+                        t.Start();
 
-                            us.Locked = true;
-                            Audit.WriteEntry1("[LOGIN]User is locked");
-                            Console.WriteLine("User is locked");
-                            Task t = new Task(() =>
-                            {
-                                Console.WriteLine("hey1");
-                                Thread.Sleep(10000);
-                                us.Locked = false;
-                                Console.WriteLine("hey2");
-
-                            });
-                            t.Start();
-
-                            return false;
-                        }
-                        return false;
+                        
                     }
-                }
-                else
-                {
+					return false;
+				}
+			}
+			else
+			{
+				Console.WriteLine("[LOGIN]User doesn't exist.");
+				return false;
+			}
+		}
 
-                    /*  Audit.WriteEntry1("[LOGIN]User is locked!");
-                      Task t = new Task(() =>
-                      {
-                          Console.WriteLine("hey3");
-                          Thread.Sleep(1000);
-                          us.Locked = false;
-                          Console.WriteLine("hey4");
-                      });
-                      t.Start();
-                      */
-                    return false;
-                }
-            }
-            else
-            {
-                Console.WriteLine("[LOGIN]User doesn't exist.");
-                return false;
-            }
-        }
-
-
-        public bool Logout(string username)
-        {
-            User us;
-            if (CredentialService.users.TryGetValue(username, out us))
-            {
-                us.Loged = false;
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("[LOGOUT]User doesnt exist.");
-                return false;
-            }
+		public bool Logout(string username)
+		{
+			User us;
+			if (CredentialService.users.TryGetValue(username, out us))
+			{
+				us.Loged = false;
+				return true;
+			}
+			else
+			{
+				Console.WriteLine("[LOGOUT]User doesnt exist.");
+				return false;
+			}
 
 
 		}
@@ -108,4 +99,11 @@ namespace CredentialStoreProject
 
         
 
+
+        string IAuthentificationService.GetPublicKey()
+        {
+            throw new NotImplementedException();
+        }
+    }
+	}
 

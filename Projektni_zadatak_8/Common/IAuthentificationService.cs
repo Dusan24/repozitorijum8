@@ -17,7 +17,7 @@ namespace Common
         [OperationContract]
         bool Logout(string username);
         [OperationContract]
-        RSACryptoServiceProvider GetPublicKey();
+        string GetPublicKey();
 
         [OperationContract]
         bool SendKey(byte[] key);
