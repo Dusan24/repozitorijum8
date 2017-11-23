@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ClientUsers
 {
@@ -21,12 +22,12 @@ namespace ClientUsers
 
         {
             factory = this.CreateChannel();
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            rsa.FromXmlString(GetPublicKey());
+            Credentials.ServiceCertificate.SetDefaultCertificate("credentialstore",StoreLocation.LocalMachine,StoreName.My);
+            RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)Credentials.ServiceCertificate.DefaultCertificate.PrivateKey;
             new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
             byte[] encrypted_key = rsa.Encrypt(key,false);
             SendKey(encrypted_key);
-           
+            this.Credentials.ServiceCertificate
         }
 
         public string GetPublicKey()

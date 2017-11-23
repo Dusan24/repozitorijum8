@@ -7,6 +7,7 @@ using System.ServiceModel;
 using Common;
 using System.IdentityModel.Policy;
 using System.ServiceModel.Description;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AutentificationServiceProject
 {
@@ -22,7 +23,9 @@ namespace AutentificationServiceProject
 
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);
-            
+
+            host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice");
+
             ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
             newAudit.AuditLogLocation = AuditLogLocation.Application;
             newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
