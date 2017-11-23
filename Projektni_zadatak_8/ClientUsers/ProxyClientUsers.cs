@@ -22,19 +22,19 @@ namespace ClientUsers
 
         {
             factory = this.CreateChannel();
-            Credentials.ServiceCertificate.SetDefaultCertificate("credentialstore",StoreLocation.LocalMachine,StoreName.My);
-            RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)Credentials.ServiceCertificate.DefaultCertificate.PrivateKey;
+
+            RSACryptoServiceProvider rsa = GetCertificate();
             new RNGCryptoServiceProvider().GetBytes(key = new byte[20]);
             byte[] encrypted_key = rsa.Encrypt(key,false);
             SendKey(encrypted_key);
          
         }
 
-        public string GetPublicKey()
+        public RSACryptoServiceProvider GetCertificate()
         {
             try
             {
-                string result = factory.GetPublicKey();
+                RSACryptoServiceProvider result = factory.GetCertificate();
                 if (result!=null)
                     Console.WriteLine("Get public key successful");
                 return result;

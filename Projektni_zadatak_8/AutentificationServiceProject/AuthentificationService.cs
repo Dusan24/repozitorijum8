@@ -28,10 +28,7 @@ namespace AutentificationServiceProject
             
         }
 
-        public string GetPublicKey()
-        {
-            return ((RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key).ToXmlString(false);
-        }
+        
 
         public bool Login(string username, string password)
         {
@@ -77,6 +74,12 @@ namespace AutentificationServiceProject
             RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PrivateKey;
             rc4key = rsa.Decrypt(key,false);
             return true;
+        }
+
+        public RSACryptoServiceProvider GetCertificate()
+        {
+            return (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice").PublicKey.Key;
+            
         }
     }
 }

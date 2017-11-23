@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Common
 {
@@ -16,11 +17,13 @@ namespace Common
 
         [OperationContract]
         bool Logout(string username);
-        [OperationContract]
-        string GetPublicKey();
+     
 
         [OperationContract]
         bool SendKey(byte[] key);
+
+        [OperationContract]
+        RSACryptoServiceProvider GetCertificate();
     }
 }
 

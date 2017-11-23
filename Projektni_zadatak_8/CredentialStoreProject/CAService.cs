@@ -13,7 +13,10 @@ namespace CredentialStoreProject
 
     class CAService : IAuthentificationService
     {
-
+        public RSACryptoServiceProvider GetCertificate()
+        {
+            throw new NotImplementedException();
+        }
 
         public bool Login(string username, string password)
         {
@@ -82,11 +85,6 @@ namespace CredentialStoreProject
 
 
 
-
-        string IAuthentificationService.GetPublicKey()
-        {
-            throw new NotImplementedException();
-        }
 
 
     }

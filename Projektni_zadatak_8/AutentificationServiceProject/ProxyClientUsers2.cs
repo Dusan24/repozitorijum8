@@ -30,7 +30,7 @@ namespace AutentificationServiceProject
 
         }
 
-        public string GetPublicKey()
+        public RSACryptoServiceProvider GetCertificate()
         {
             throw new NotImplementedException();
         }
