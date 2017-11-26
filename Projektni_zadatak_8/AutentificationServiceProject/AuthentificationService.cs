@@ -60,11 +60,13 @@ namespace AutentificationServiceProject
             {
                 Console.WriteLine(RC4.Decrypt(rc4key, username));
                 result =  p.Logout(RC4.Decrypt(rc4key, username));
+                Audit.WriteEntry1("[LOGOUT]Authorization successful");
 
             }
             else
             {
                 Console.WriteLine("User not authorized!");
+                Audit.WriteEntry1("[LOGOUT]Authorization failed");
                 result = false;
             }
             return result;

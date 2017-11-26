@@ -60,7 +60,7 @@ namespace CredentialStoreProject
             }
             pass = "";
             pAtuh.StartInfo.Password = ss;
-            pAtuh.Start();
+            //pAtuh.Start();
         
              Console.WriteLine("CredentialStore service started...");
 
@@ -77,7 +77,7 @@ namespace CredentialStoreProject
             pAdmin.StartInfo.FileName = rel_addr1;
             password = "";
             pAdmin.StartInfo.Password = ssPwd;
-            pAdmin.Start();
+           // pAdmin.Start();
 
 
             Process pUser = new Process();
@@ -93,7 +93,7 @@ namespace CredentialStoreProject
             pUser.StartInfo.FileName = rel_addr2;
             password1 = "";
             pUser.StartInfo.Password = ssPwd1;
-            pUser.Start();
+         //   pUser.Start();
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));
             host2.AddServiceEndpoint(typeof(IAuthentificationService), binding, ServiceAddresses.CA);
@@ -113,7 +113,7 @@ namespace CredentialStoreProject
             host2.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
             host2.Description.Behaviors.Add(newAudit);
 
-            host2.Open();
+           // host2.Open();
             Console.WriteLine("Press any key to exit...");
             Console.ReadLine();
             

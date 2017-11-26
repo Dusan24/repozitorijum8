@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
@@ -34,6 +35,8 @@ namespace ClientAdmins
                     Console.WriteLine("6.Finish application ");
                     Console.WriteLine("**********************");
 
+                    string pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";
+                    Regex rgx = new Regex(pattern);
                     int choice;
                     bool parsed, in_range;
       
@@ -67,9 +70,16 @@ namespace ClientAdmins
                             string a1 = Console.ReadLine();
                             Console.WriteLine("Enter password");
                             string b1 = Console.ReadLine();
-
+                            while(!rgx.IsMatch(b1))
+                            {
+                                Console.WriteLine("Password doesn't meet minimum requirements.");
+                                Console.WriteLine("Enter a new password with at least 8 characters, one upper case, one lower case and one number!");
+                                b1 = Console.ReadLine();
+                            }
                             p.CreateAccount(a1, b1);
+                            //Audit.WriteEntry1("New account created successfuly");
                             break;
+                            
                         case 2:
                             Console.WriteLine("Enter username");
                             string a2 = Console.ReadLine();

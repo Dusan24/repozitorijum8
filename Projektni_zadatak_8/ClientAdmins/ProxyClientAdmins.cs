@@ -26,6 +26,7 @@ namespace ClientAdmins
             byte[] encrypted_key = rsa.Encrypt(byte_key, false);
             SendKey(encrypted_key);
             key = Convert.ToBase64String(byte_key);
+            
         }
 
         public bool CreateAccount(string username, string password)
@@ -33,9 +34,14 @@ namespace ClientAdmins
             bool result;
             try
             {
-                result = factory.CreateAccount(RC4.Encrypt(key,  username), RC4.Encrypt(key, password));
-                if(result)
+                string username1 = RC4.Encrypt(key, username);
+                string password1 = RC4.Encrypt(key, password);
+                result = factory.CreateAccount(username1,password1);
+                if (result)
+                {
                     Console.WriteLine("Account created succesfully");
+                    Audit.WriteEntry1("Account created succesfully");
+                }
                 return result;
                 
             }
