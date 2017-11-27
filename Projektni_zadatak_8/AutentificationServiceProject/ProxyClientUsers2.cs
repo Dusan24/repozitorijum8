@@ -21,11 +21,7 @@ namespace AutentificationServiceProject
             factory = this.CreateChannel();
         }
 
-<<<<<<< HEAD
       
-=======
-        int b = 6;
->>>>>>> 18ad14789a0cbc2a6f5070054a9a03b71a580a6a
 
         public bool Login(string username, string password)
         {
