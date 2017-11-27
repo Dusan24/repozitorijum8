@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using Common;
+using System.IdentityModel.Policy;
+using System.ServiceModel.Description;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AutentificationServiceProject
 {
@@ -13,20 +16,39 @@ namespace AutentificationServiceProject
         static void Main(string[] args)
         {
 
-
+            Console.WriteLine(Functions.GetLocalIPAddress());
             NetTcpBinding binding = new NetTcpBinding();
 
-
-    
-            string address = ServiceAddresses.AuthentificationServiceAddress;
-
-
-
+            string address =string.Format( ServiceAddresses.AuthentificationServiceAddress,"localhost");
+            Console.WriteLine("Enter Server IP:");
+            AuthentificationService.ip=Console.ReadLine();
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);
 
+            host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice");
+
+            ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
+            newAudit.AuditLogLocation = AuditLogLocation.Application;
+            newAudit.ServiceAuthorizationAuditLevel = AuditLevel.SuccessOrFailure;
+            newAudit.SuppressAuditFailure = true;
+
+            host.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
+            host.Description.Behaviors.Add(newAudit);
+
+            host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
+
+            List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
+            policies.Add(new CustomAuthorizationPolicy());
+            host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
+            host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
+
+            host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
+
 
             host.Open();
+            Console.WriteLine("AuthenticationService started...");
 
             Console.ReadLine();
 
