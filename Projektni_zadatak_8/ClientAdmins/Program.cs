@@ -21,7 +21,6 @@ namespace ClientAdmins
 
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb,string.Format(ServiceAddresses.CredentialServiceAddress,ip)))
             {
- 
 
                 while(true)
                 {

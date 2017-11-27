@@ -24,41 +24,53 @@ namespace CredentialStoreProject
             {
                 if (us.Enabled)
                 {
-                    if (SecurePasswordHasher.Verify(password, us.Password))
+                    if (!us.Locked)
                     {
-                        Console.WriteLine("Login successful.");
-                        us.Loged = true;
-                        us.Count = 0;
-                        return true;
+                        if (SecurePasswordHasher.Verify(password, us.Password))
+                        {
+                            Console.WriteLine("Login successful.");
+                            us.Loged = true;
+                            us.Count = 0;
+                            return true;
+                        }
+                        else
+                        {
+                            us.Count++;
+                            Console.WriteLine("Login failed.");
+                            if (us.Count >= 5)
+
+                            {
+
+                                Audit.WriteEntry2(String.Format(("Locking the account{0}"), us.Username));
+                                us.Locked = true;
+                                
+                                Task t = new Task(() =>
+                                {
+                                    Thread.Sleep(300000);
+                                    us.Locked = false;
+
+                                });
+                                t.Start();
+
+
+                            }
+                            return false;
+                        }
                     }
                     else
                     {
-                        us.Count++;
-                        Console.WriteLine("Login failed.");
-                        if (us.Count >= 5)
-
-                        {
-                            us.Locked = true;
-                            Console.WriteLine("User is locked");
-                            Task t = new Task(() =>
-                            {
-                                Thread.Sleep(300000);
-                                us.Locked = false;
-
-                            });
-                            t.Start();
-
-
-                        }
+                        Console.WriteLine("[LOGIN]User is locked!");
+                        Audit.WriteEntry2("[LOGIN]Attempting to login into locked account!");
                         return false;
                     }
+
                 }
                 else
                 {
                     Console.WriteLine("[LOGIN]User is disabled!");
+                    Audit.WriteEntry2("[LOGIN]Attempting to login into disabled account!");
                     return false;
-                }
-                      
+                }   
 
             }
             else

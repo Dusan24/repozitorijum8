@@ -18,7 +18,7 @@ namespace CredentialStoreProject
 
         private static Dictionary<string, User> Load()
         {
-            if(!File.Exists(file_name))
+            if (!File.Exists(file_name))
             {
                 return new Dictionary<string, User>();
             }
@@ -35,15 +35,15 @@ namespace CredentialStoreProject
             {
 
                 fs.Close();
-                
-    
 
-                
-                return new Dictionary<string, User>(); 
+
+
+
+                return new Dictionary<string, User>();
 
             }
 
-            
+
         }
 
 
@@ -53,10 +53,10 @@ namespace CredentialStoreProject
 
             string _username = RC4.Decrypt(rc4key, username);
             string _password = RC4.Decrypt(rc4key, password);
-          
 
-            //if (principal.IsInRole(Permissions.CreateAccount.ToString()))
-            //{
+
+            if (principal.IsInRole(Permissions.CreateAccount.ToString()))
+            {
                 if (!users.ContainsKey(_username))
                 {
 
@@ -73,52 +73,52 @@ namespace CredentialStoreProject
                     Console.WriteLine("User already exists.");
                     return false;
                 }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Current user not authorized!");
-            //    return false;
-            //}
+            }
+            else
+            {
+                Console.WriteLine("Current user not authorized!");
+                return false;
+            }
         }
 
         public bool DeleteAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
-            string _username = RC4.Decrypt(rc4key,username);
+            string _username = RC4.Decrypt(rc4key, username);
 
-            //if (principal.IsInRole(Permissions.DeleteAccount.ToString()))
-           // {
-                    if (users.ContainsKey(_username))
-                    {
-                        users.Remove(_username);
-                        FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                        BinaryFormatter bf = new BinaryFormatter();
-                        bf.Serialize(fs, users);
-                        fs.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-           // }
-           // else
-          //  {
-          //      Console.WriteLine("Current user not authorized!");
-            //    return false;
-          //  }
-}
+            if (principal.IsInRole(Permissions.DeleteAccount.ToString()))
+            {
+                if (users.ContainsKey(_username))
+                {
+                    users.Remove(_username);
+                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(fs, users);
+                    fs.Close();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Current user not authorized!");
+                return false;
+            }
+        }
 
         public bool DisableAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string _username = RC4.Decrypt(rc4key, username);
 
-            //if (principal.IsInRole(Permissions.DisableAccount.ToString()))
-            //{
+            if (principal.IsInRole(Permissions.DisableAccount.ToString()))
+            {
                 if (users.ContainsKey(_username))
                 {
-                    if(users[_username].Enabled == true)
+                    if (users[_username].Enabled == true)
                     {
                         users[_username].Enabled = false;
                         FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
@@ -137,12 +137,12 @@ namespace CredentialStoreProject
 
                     return false;
                 }
-            //}
-            //else
-           // {
-              //  Console.WriteLine("Current user not authorized!");
-               // return false;
-           // }
+            }
+            else
+            {
+                Console.WriteLine("Current user not authorized!");
+                return false;
+            }
         }
 
         public bool EnableAccount(string username)
@@ -150,47 +150,48 @@ namespace CredentialStoreProject
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string _username = RC4.Decrypt(rc4key, username);
 
-            //if (principal.IsInRole(Permissions.EnableAccount.ToString()))
-            //{
-            if (users.ContainsKey(_username))
+            if (principal.IsInRole(Permissions.EnableAccount.ToString()))
             {
-                if (users[_username].Enabled == false)
+                if (users.ContainsKey(_username))
                 {
-                    users[_username].Enabled = true;
-                    FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, users);
-                    fs.Close();
-                    return true;
+                    if (users[_username].Enabled == false)
+                    {
+                        users[_username].Enabled = true;
+                        FileStream fs = new FileStream(file_name, FileMode.OpenOrCreate);
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(fs, users);
+                        fs.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+
+                    return false;
                 }
             }
+
             else
             {
-
+                Console.WriteLine("Current user not authorized!");
                 return false;
             }
         }
-           // }
-            //else
-            //{
-            //    Console.WriteLine("Current user not authorized!");
-            //    return false;
-            //}
-        
 
-        public bool LockAccount(string username)
+
+    public bool LockAccount(string username)
         {
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             string _username = RC4.Decrypt(rc4key, username);
 
 
 
-            //if (principal.IsInRole(Permissions.LockAccount.ToString()))
-            //{
+            if (principal.IsInRole(Permissions.LockAccount.ToString()))
+            {
                 if (users.ContainsKey(_username))
                 {
                     if (users[_username].Locked == false)
@@ -212,12 +213,12 @@ namespace CredentialStoreProject
 
                     return false;
                 }
-           // }
-            //else
-            //{
-            //    Console.WriteLine("Current user not authorized!");
-            //    return false;
-            //}
+            }
+            else
+            {
+                Console.WriteLine("Current user not authorized!");
+                return false;
+            }
         }
 
         public bool SendKey(byte[] key)

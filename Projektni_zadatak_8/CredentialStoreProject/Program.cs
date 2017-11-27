@@ -48,13 +48,12 @@ namespace CredentialStoreProject
             host1.Description.Behaviors.Add(newAudit);
 
             host1.Open();
-           
+   
         
              Console.WriteLine("CredentialStore service started...");
 
+  
 
-
-           
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));
             host2.AddServiceEndpoint(typeof(IAuthentificationService), binding,string.Format( ServiceAddresses.CA,"localhost"));

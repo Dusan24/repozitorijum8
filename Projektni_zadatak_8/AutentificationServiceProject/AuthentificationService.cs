@@ -35,18 +35,18 @@ namespace AutentificationServiceProject
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             bool result = false;
 
-            //if (principal.IsInRole(Permissions.Login.ToString()))
-            //{
+            if (principal.IsInRole(Permissions.Login.ToString()))
+            {
                 Audit.WriteEntry1("[LOGIN]Authorization successful.");
            
                 result = p.Login(RC4.Decrypt(rc4key, username), RC4.Decrypt(rc4key, password));
-            //}
-            //else
-            //{
-            //    Audit.WriteEntry1("[LOGIN]Authorization failed");
-            //    Console.WriteLine("User not authorized!");
-            //    result = false;
-            //}
+        }
+            else
+            {
+                Audit.WriteEntry1("[LOGIN]Authorization failed");
+                Console.WriteLine("User not authorized!");
+                result = false;
+            }
 
             return result;
         }
@@ -56,19 +56,19 @@ namespace AutentificationServiceProject
             CustomPrincipal principal = Thread.CurrentPrincipal as CustomPrincipal;
             bool result = false;
 
-            //if (principal.IsInRole(Permissions.Logout.ToString()))
-            //{
+            if (principal.IsInRole(Permissions.Logout.ToString()))
+            {
                 Console.WriteLine(RC4.Decrypt(rc4key, username));
                 result =  p.Logout(RC4.Decrypt(rc4key, username));
                 Audit.WriteEntry1("[LOGOUT]Authorization successful");
 
-            //}
-            //else
-            //{
-            //    Console.WriteLine("User not authorized!");
-            //    Audit.WriteEntry1("[LOGOUT]Authorization failed");
-            //    result = false;
-            //}
+        }
+            else
+            {
+                Console.WriteLine("User not authorized!");
+                Audit.WriteEntry1("[LOGOUT]Authorization failed");
+                result = false;
+            }
             return result;
         }
 
