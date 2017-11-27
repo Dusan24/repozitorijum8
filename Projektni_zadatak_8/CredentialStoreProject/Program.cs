@@ -26,7 +26,7 @@ namespace CredentialStoreProject
             ServiceHost host1 = new ServiceHost(typeof(CredentialService));
             host1.AddServiceEndpoint(typeof(IAccountManagement), binding,string.Format(ServiceAddresses.CredentialServiceAddress,"localhost"));
 
-            host1.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.None;
+            
 
             host1.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
             

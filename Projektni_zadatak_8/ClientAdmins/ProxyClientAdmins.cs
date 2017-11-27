@@ -17,6 +17,7 @@ namespace ClientAdmins
 
         public ProxyClientAdmins(NetTcpBinding binding, string address) : base(binding, address)
         {
+            this.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice");
             factory = this.CreateChannel();
 
             RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "credentialstore").PublicKey.Key;
