@@ -13,7 +13,7 @@ namespace AutentificationServiceProject
         static void Main(string[] args)
         {
 
-
+            Console.WriteLine(Functions.GetLocalIPAddress());
             NetTcpBinding binding = new NetTcpBinding();
 
 

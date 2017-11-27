@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +14,15 @@ namespace CredentialStoreProject
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Functions.GetLocalIPAddress());
+
 
             NetTcpBinding binding = new NetTcpBinding();
             ServiceHost host1 = new ServiceHost(typeof(CredentialService));
             host1.AddServiceEndpoint(typeof(IAccountManagement), binding, ServiceAddresses.CredentialServiceAddress);
             host1.Open();
 
-            
+
             ServiceHost host2 = new ServiceHost(typeof(CAService));
             host2.AddServiceEndpoint(typeof(IAuthentificationService), binding, ServiceAddresses.CA);
             host2.Open();
@@ -30,5 +34,9 @@ namespace CredentialStoreProject
             host1.Close();
 
         }
+
+
+      
     }
 }
+
