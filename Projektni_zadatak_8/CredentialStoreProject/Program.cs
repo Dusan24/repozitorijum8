@@ -113,7 +113,7 @@ namespace CredentialStoreProject
             host2.Description.Behaviors.Remove<ServiceSecurityAuditBehavior>();
             host2.Description.Behaviors.Add(newAudit);
 
-           // host2.Open();
+            host2.Open();
             Console.WriteLine("Press any key to exit...");
             Console.ReadLine();
             

@@ -16,7 +16,6 @@ namespace ClientAdmins
         string key;
 
         public ProxyClientAdmins(NetTcpBinding binding, string address) : base(binding, address)
-
         {
             factory = this.CreateChannel();
 
