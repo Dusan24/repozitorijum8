@@ -24,7 +24,7 @@ namespace CredentialStoreProject
 
             NetTcpBinding binding = new NetTcpBinding();
             ServiceHost host1 = new ServiceHost(typeof(CredentialService));
-            host1.AddServiceEndpoint(typeof(IAccountManagement), binding,string.Format( ServiceAddresses.CredentialServiceAddress,"localhost"));
+            host1.AddServiceEndpoint(typeof(IAccountManagement), binding,string.Format(ServiceAddresses.CredentialServiceAddress,"localhost"));
             
             host1.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
             
