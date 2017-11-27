@@ -3,55 +3,98 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CredentialStoreProject
 {
-    class CAService: IAuthentificationService
+
+
+    class CAService : IAuthentificationService
     {
-      
-        
+
 
         public bool Login(string username, string password)
         {
             User us;
-           if( CredentialService.users.TryGetValue(username,out us))
+
+            if (CredentialService.users.TryGetValue(username, out us))
             {
-                if (SecurePasswordHasher.Verify(password, us.Password))
+                if (us.Enabled)
                 {
-                    Console.WriteLine("Login successful.");
-                    us.Loged = true;
-                    return true;
+                    if (SecurePasswordHasher.Verify(password, us.Password))
+                    {
+                        Console.WriteLine("Login successful.");
+                        us.Loged = true;
+                        us.Count = 0;
+                        return true;
+                    }
+                    else
+                    {
+                        us.Count++;
+                        Console.WriteLine("Login failed.");
+                        if (us.Count >= 5)
+
+                        {
+                            us.Locked = true;
+                            Console.WriteLine("User is locked");
+                            Task t = new Task(() =>
+                            {
+                                Thread.Sleep(300000);
+                                us.Locked = false;
+
+                            });
+                            t.Start();
+
+
+                        }
+                        return false;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Login not successful.");
+                    Console.WriteLine("[LOGIN]User is disabled!");
                     return false;
                 }
+                      
+
             }
-           else
+            else
             {
-                throw new Exception("User doesnt exist.");
+                Console.WriteLine("[LOGIN]User doesn't exist.");
+                return false;
+
+
             }
         }
+
+
 
         public bool Logout(string username)
         {
             User us;
             if (CredentialService.users.TryGetValue(username, out us))
             {
-                us.Loged = true;
+                us.Loged = false;
+                Audit.WriteEntry1("[LOGOUT]Logout successful");
                 return true;
             }
             else
             {
-                throw new Exception("User doesnt exist.");
+                Console.WriteLine("[LOGOUT]User doesnt exist.");
+                return false;
             }
 
 
         }
 
+        public bool SendKey(byte[] key)
+        {
+            throw new NotImplementedException();
+        }
 
+       
     }
 }

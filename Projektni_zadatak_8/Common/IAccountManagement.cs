@@ -26,5 +26,8 @@ namespace Common
         [OperationContract]
         bool DisableAccount(string username);
 
+        [OperationContract]
+        bool SendKey(byte[] key);
+
     }
 }
