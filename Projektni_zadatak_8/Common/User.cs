@@ -18,7 +18,6 @@ namespace Common
         private bool enabled = false;
         private bool locked = false;
         private bool loged = false;
-        private int count = 0;
 
         public User(string username, string password)
         {
@@ -41,19 +40,6 @@ namespace Common
             }
         }
 
-        [DataMember]
-        public int Count
-        {
-            get
-            {
-                return count;
-            }
-
-            set
-            {
-                count = value;
-            }
-        }
 
         [DataMember]
         public string Username

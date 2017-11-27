@@ -12,72 +12,27 @@ namespace ClientUsers
         static void Main(string[] args)
         {
             NetTcpBinding tb = new NetTcpBinding();
-            
 
-            using (ProxyClientUsers p = new ProxyClientUsers(tb, ServiceAddresses.AuthentificationServiceAddress))
+
+            using (ProxyClientUsers p = new ProxyClientUsers(tb,ServiceAddresses.AuthentificationServiceAddress))
             {
 
-                string LoggedIn = string.Empty;
-
-                while (true)
-                {
-                   
-                    Console.WriteLine("**************************");
-                    Console.WriteLine("Options:");
-                    Console.WriteLine("1.Login:");
-                    Console.WriteLine("2.Logout:");
-                    Console.WriteLine("3.Quit:");
-                    Console.WriteLine("**************************");
-
-                    int choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice == 3)
-                    {
-                        break;
-                    }
-
-                    switch (choice)
-                    {
-                        case 1:
-                            Console.WriteLine("Enter username: ");
-                            string a = Console.ReadLine();
-                            Console.WriteLine("Enter password: ");
-                            string b = Console.ReadLine();
-
-                            if (p.Login(a, b))
-                            {
-                                LoggedIn = a;
-                                Console.WriteLine("User {0} logged in successfully.",LoggedIn);
-                                break;
-                            }
-                            else
-                            {
-                                LoggedIn = "";
-                                Console.WriteLine("User login failed.");
-                                break;
-                            }
-
-                        case 2:
-
-                            if (p.Logout(LoggedIn))
-                            {
-                                Console.WriteLine("User {0} logged out successfully.",LoggedIn);
-                                LoggedIn = "";
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine("User logout failed.");
-                                break;
-                            }
-
-                        default:
-                            break;
+                p.Login("user1","123");
+                p.Logout("user1");
 
 
-                    }
-                }
+                Console.WriteLine("Unesite korisnicko ime: ");
+                string a = Console.ReadLine();
+                Console.WriteLine("Unesite lozinku: ");
+                string b = Console.ReadLine();
 
-                
+                p.Login(a,b);
+
+            
+                p.Login("user1","pas1");
+                p.Logout("user1");
+
+                Console.ReadKey();
             }
         }
     }
