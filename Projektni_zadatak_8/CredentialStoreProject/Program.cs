@@ -48,54 +48,13 @@ namespace CredentialStoreProject
             host1.Description.Behaviors.Add(newAudit);
 
             host1.Open();
-            string rel_addr = "..\\..\\..\\..\\AutentificationServiceProject\\bin\\x86\\Debug\\AutentificationServiceProject.exe";
-
-            Process pAtuh = new Process();
-            pAtuh.StartInfo.UseShellExecute = false;
-            System.Security.SecureString ss = new System.Security.SecureString();
-            pAtuh.StartInfo.FileName = rel_addr;
-            pAtuh.StartInfo.UserName = "Administrator";
-            string pass = "student";
-            for (int x = 0; x < pass.Length; x++)
-            {
-                ss.AppendChar(pass[x]);
-            }
-            pass = "";
-            pAtuh.StartInfo.Password = ss;
-            //pAtuh.Start();
+           
         
              Console.WriteLine("CredentialStore service started...");
 
-            Process pAdmin = new Process();
-            System.Security.SecureString ssPwd = new System.Security.SecureString();
-            pAdmin.StartInfo.UseShellExecute = false;
-            string rel_addr1 = "..\\..\\..\\..\\ClientAdmins\\bin\\x86\\Debug\\ClientAdmins.exe";
-            pAdmin.StartInfo.UserName = "admin1";
-            string password = "123456789";
-            for (int x = 0; x < password.Length; x++)
-            {
-                ssPwd.AppendChar(password[x]);
-            }
-            pAdmin.StartInfo.FileName = rel_addr1;
-            password = "";
-            pAdmin.StartInfo.Password = ssPwd;
-           // pAdmin.Start();
 
 
-            Process pUser = new Process();
-            System.Security.SecureString ssPwd1 = new System.Security.SecureString();
-            pUser.StartInfo.UseShellExecute = false;
-            string rel_addr2 = "..\\..\\..\\..\\ClientUsers\\bin\\x86\\Debug\\ClientUsers.exe";
-            pUser.StartInfo.UserName = "user1";
-            string password1 = "123456789";
-            for (int x = 0; x < password1.Length; x++)
-            {
-                ssPwd1.AppendChar(password1[x]);
-            }
-            pUser.StartInfo.FileName = rel_addr2;
-            password1 = "";
-            pUser.StartInfo.Password = ssPwd1;
-         //   pUser.Start();
+           
 
             ServiceHost host2 = new ServiceHost(typeof(CAService));
             host2.AddServiceEndpoint(typeof(IAuthentificationService), binding,string.Format( ServiceAddresses.CA,"localhost"));
@@ -123,9 +82,7 @@ namespace CredentialStoreProject
             host1.Close();
             host2.Close();
 
-            pAtuh.Kill();
-            pAdmin.Kill();
-            pUser.Kill();
+           
             
 
 

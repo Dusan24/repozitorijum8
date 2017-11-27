@@ -25,7 +25,7 @@ namespace AutentificationServiceProject
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);
 
-            host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "authentificationservice");
+            
 
             ServiceSecurityAuditBehavior newAudit = new ServiceSecurityAuditBehavior();
             newAudit.AuditLogLocation = AuditLogLocation.Application;
