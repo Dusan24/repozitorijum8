@@ -109,7 +109,7 @@ namespace ClientAdmins
                             Console.WriteLine("Enter username");
                             string a5 = Console.ReadLine();
 
-                            p.DeleteAccount(a5);
+                            p.DisableAccount(a5);
 
                             break;
                         case 6:
