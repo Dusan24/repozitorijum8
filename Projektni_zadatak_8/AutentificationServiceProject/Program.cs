@@ -20,7 +20,7 @@ namespace AutentificationServiceProject
             NetTcpBinding binding = new NetTcpBinding();
 
             string address =string.Format( ServiceAddresses.AuthentificationServiceAddress,"localhost");
-            Console.WriteLine("Enter Server IP:");
+            Console.WriteLine("Enter CredentialStore Server IP:");
             AuthentificationService.ip=Console.ReadLine();
             ServiceHost host = new ServiceHost(typeof(AuthentificationService));
             host.AddServiceEndpoint(typeof(IAuthentificationService), binding, address);

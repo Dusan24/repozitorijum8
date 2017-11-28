@@ -12,7 +12,7 @@ namespace Common
 
         public const  string CredentialServiceAddress = "net.tcp://{0}:27016/CredentialService";
         public const string AuthentificationServiceAddress = "net.tcp://{0}:17/AuthentificationService";
-        public const string CA= "net.tcp://{0}:25555/CAService";
+        public const string CA= "net.tcp://{0}:8/CAService";
 
 
 

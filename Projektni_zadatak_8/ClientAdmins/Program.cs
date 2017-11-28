@@ -16,7 +16,7 @@ namespace ClientAdmins
         {
             NetTcpBinding tb = new NetTcpBinding();
 
-            Console.WriteLine("Enter Server IP:");
+            Console.WriteLine("Enter CredentialStore Server IP: ");
             string ip=Console.ReadLine();
 
             using (ProxyClientAdmins p = new ProxyClientAdmins(tb,string.Format(ServiceAddresses.CredentialServiceAddress,ip)))

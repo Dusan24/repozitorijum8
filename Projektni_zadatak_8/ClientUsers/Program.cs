@@ -13,7 +13,7 @@ namespace ClientUsers
         {
             NetTcpBinding tb = new NetTcpBinding();
 
-            Console.WriteLine("Enter Server IP:");
+            Console.WriteLine("Enter Authentification Server IP:");
             string ip = Console.ReadLine();
             using (ProxyClientUsers p = new ProxyClientUsers(tb,string.Format(ServiceAddresses.AuthentificationServiceAddress,ip)))
             {

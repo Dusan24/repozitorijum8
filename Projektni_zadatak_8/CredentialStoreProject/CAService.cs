@@ -75,6 +75,7 @@ namespace CredentialStoreProject
             }
             else
             {
+                Audit.WriteEntry1("[LOGIN]User doesn't exist.");
                 Console.WriteLine("[LOGIN]User doesn't exist.");
                 return false;
 
@@ -95,7 +96,8 @@ namespace CredentialStoreProject
             }
             else
             {
-                Console.WriteLine("[LOGOUT]User doesnt exist.");
+                Console.WriteLine("[LOGOUT]User logout failed.");
+                Audit.WriteEntry1("[LOGOUT]User logout failed.");
                 return false;
             }
 
