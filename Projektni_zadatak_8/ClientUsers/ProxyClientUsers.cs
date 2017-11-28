@@ -34,6 +34,8 @@ namespace ClientUsers
         }
 
       
+        //byte_key je kljuc klijenta
+
 
         public bool Login(string username, string password)
         {
