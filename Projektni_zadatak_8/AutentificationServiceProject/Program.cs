@@ -16,7 +16,7 @@ namespace AutentificationServiceProject
         static void Main(string[] args)
         {
 
-            Console.WriteLine(Functions.GetLocalIPAddress());
+            
             NetTcpBinding binding = new NetTcpBinding();
 
             string address =string.Format( ServiceAddresses.AuthentificationServiceAddress,"localhost");
@@ -48,7 +48,7 @@ namespace AutentificationServiceProject
 
 
             host.Open();
-            Console.WriteLine("AuthenticationService started...");
+            Console.WriteLine("AuthenticationService started at {0}", Functions.GetLocalIPAddress());
 
             Console.ReadLine();
 

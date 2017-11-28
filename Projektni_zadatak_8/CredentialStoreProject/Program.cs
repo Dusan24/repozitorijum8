@@ -20,7 +20,7 @@ namespace CredentialStoreProject
         static void Main(string[] args)
         {
 
-            Console.WriteLine(Functions.GetLocalIPAddress());
+           
 
             NetTcpBinding binding = new NetTcpBinding();
             ServiceHost host1 = new ServiceHost(typeof(CredentialService));
@@ -50,7 +50,7 @@ namespace CredentialStoreProject
             host1.Open();
    
         
-             Console.WriteLine("CredentialStore service started...");
+             Console.WriteLine("CredentialStore service started at {0}",Functions.GetLocalIPAddress());
 
   
 
