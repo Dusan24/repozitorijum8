@@ -11,7 +11,7 @@ namespace Common
     {
 
         private static EventLog customLog = null;
-        const string SourceName = "SecurityManager.Audit";
+        const string SourceName = "Audit";
         const string LogName = "PZ8";
 
         static Audit()
